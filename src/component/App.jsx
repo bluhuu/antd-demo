@@ -26,9 +26,7 @@ for (let i = 0; i < 46; i++) {
 const App = React.createClass({
             getInitialState() {
                 return {
-                    S_Product_ID: "",
-                    Name: "",
-                    S_Classification_ID: "",
+                    data: null,
                     selectedRowKeys: [0], // 这里配置默认勾选列
                     loading: false,
                 };
@@ -78,24 +76,19 @@ const App = React.createClass({
                 };
                 const hasSelected = selectedRowKeys.length > 0;
                 return ( < div >
-                        < div style = {
-                            {
-                                marginBottom: 16
-                            }
-                        } >
+                        < div style = {{marginBottom: 16}} >
                         < Button type = "primary"
-                        onClick = {
-                            this.start
-                        }
-                        disabled = {
-                            !hasSelected
-                        }
-                        loading = {
-                            loading
-                        } > 操作 < /Button>
-                    <span style={{ marginLeft: 8 }}>{hasSelected ? `选择了 ${selectedRowKeys.length} 个对象` : ''}</span >
+                            onClick = {this.start}
+                            disabled = {!hasSelected}
+                            loading = {loading} > 操作 < /Button>
+                        <span style={{ marginLeft: 8 }}>
+                            {hasSelected ? `选择了 ${selectedRowKeys.length} 个对象` : ''}
+                        </span >
                         < /div>
-                <Table rowSelection={rowSelection} columns={columns} dataSource={this.state.data} / >
+                        <Table
+                            rowSelection={rowSelection}
+                            columns={columns}
+                            dataSource={this.state.data} / >
                         < /div>
         );
     }
