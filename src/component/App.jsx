@@ -1,15 +1,16 @@
 ﻿import React from 'react';
+import * as $ from 'jquery';
 import {Table, Button} from 'antd';
 
 const columns = [{
-    title: '姓名',
-    dataIndex: 'name',
+    title: '商品编号',
+    dataIndex: 'S_Product_ID',
 }, {
-    title: '年龄',
-    dataIndex: 'age',
+    title: '名 称',
+    dataIndex: 'Name',
 }, {
-    title: '住址',
-    dataIndex: 'address',
+    title: '分类号',
+    dataIndex: 'S_Classification_ID',
 }];
 
 const data = [];
@@ -25,16 +26,20 @@ for (let i = 0; i < 46; i++) {
 const App = React.createClass({
             getInitialState() {
                 return {
+                    S_Product_ID: "",
+                    Name: "",
+                    S_Classification_ID: "",
                     selectedRowKeys: [0], // 这里配置默认勾选列
                     loading: false,
                 };
             },
             componentDidMount: function() {
-                this.serverRequest = $.get(this.props.source, function(result) {
-                    var lastGist = result[0];
+                this.serverRequest = $.get("/elink_scm_web/sproductAction/query.do", function(result) {
+                    var data = JSON.parse(result).rows;
+                    console.log(JSON.parse(result).rows);
+                    console.log(JSON.parse(result).total);
                     this.setState({
-                        username: lastGist.owner.login,
-                        lastGistUrl: lastGist.html_url
+                        data:data,
                     });
                 }.bind(this));
             },
@@ -87,7 +92,7 @@ const App = React.createClass({
                         } > 操作 < /Button>
                     <span style={{ marginLeft: 8 }}>{hasSelected ? `选择了 ${selectedRowKeys.length} 个对象` : ''}</span >
                         < /div>
-                <Table rowSelection={rowSelection} columns={columns} dataSource={data} / >
+                <Table rowSelection={rowSelection} columns={columns} dataSource={this.state.data} / >
                         < /div>
         );
     }
