@@ -1,5 +1,5 @@
 import '../common/lib';
-import App from '../component/App';
+import App from '../component/App_pag';
 import ReactDOM from 'react-dom';
 import React from 'react';
 
