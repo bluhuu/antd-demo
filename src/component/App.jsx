@@ -34,14 +34,17 @@ const App = React.createClass({
                 };
             },
             componentDidMount: function() {
-                this.serverRequest = $.get("/elink_scm_web/sproductAction/query.do", function(result) {
-                    var data = JSON.parse(result).rows;
-                    console.log(JSON.parse(result).rows);
-                    console.log(JSON.parse(result).total);
-                    this.setState({
-                        data:data,
-                    });
-                }.bind(this));
+                var _self = this;
+                this.serverRequest = $.ajax({
+                    url: "/elink_scm_web/sproductAction/query.do",
+                    data:"",
+                    dataType:"json",
+                    success: function(result) {
+                        var data = result.rows;
+                        _self.setState({
+                            data: data,
+                        });
+                    }});
             },
             componentWillUnmount: function() {
                 this.serverRequest.abort();
