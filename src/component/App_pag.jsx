@@ -67,11 +67,11 @@ const columns = [
         }
 ];
 
-const App = React.createClass({
+var MyTable = React.createClass({
             getInitialState() {
                 return {
                     data: [],
-                    pagination: {pageSize:8,current:1},
+                    pagination: {pageSize:this.props.pageSize,current:1},
                     loading: false,
                 };
             },
@@ -96,7 +96,7 @@ const App = React.createClass({
                     loading: true
                 });
                 $.ajax({
-                    url: "/elink_scm_web/sproductAction/query.do",
+                    url: this.props.url,
                     data: params,
                     dataType: "json",
                     success: function(result) {
@@ -120,13 +120,19 @@ const App = React.createClass({
                 });
             },
             render() {
-                return ( < Table columns = {columns}
+                return ( < Table columns = {this.props.columns}
                                 dataSource = {this.state.data}
                                 pagination = {this.state.pagination}
                                 loading = {this.state.loading}
                                 onChange = {this.handleTableChange} />
                         );
             },
+});
+
+const App = React.createClass({
+    render() {
+        return (< MyTable url="/elink_scm_web/sproductAction/query.do" columns={columns}  pageSize="10" />);
+    },
 });
 
 export default App;
