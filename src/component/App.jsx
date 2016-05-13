@@ -58,7 +58,7 @@ const App = React.createClass({
                         selectedRowKeys: [],
                         loading: false,
                     });
-                }, 1000);
+                }, 500);
             },
             onSelectChange(selectedRowKeys) {
                 console.log('selectedRowKeys changed: ', selectedRowKeys);
@@ -88,6 +88,7 @@ const App = React.createClass({
                         <Table
                             rowSelection={rowSelection}
                             columns={columns}
+                            size="size"
                             dataSource={this.state.data} / >
                         < /div>
         );

@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import {Table} from 'antd';
+import {Table, Button} from 'antd';
 import * as $ from 'jquery';
 
 const columns = [
@@ -67,11 +67,12 @@ const columns = [
         }
 ];
 
-var MyTable = React.createClass({
+const App = React.createClass({
             getInitialState() {
                 return {
+                    selectedRowKeys: [],  // 这里配置默认勾选列
                     data: [],
-                    pagination: {pageSize:this.props.pageSize,current:1},
+                    pagination: {pageSize:8,current:1},
                     loading: false,
                 };
             },
@@ -119,20 +120,46 @@ var MyTable = React.createClass({
                     start: (this.state.pagination.current - 1) * this.state.pagination.pageSize
                 });
             },
-            render() {
-                return ( < Table columns = {this.props.columns}
-                                dataSource = {this.state.data}
-                                pagination = {this.state.pagination}
-                                loading = {this.state.loading}
-                                onChange = {this.handleTableChange} />
-                        );
+            start() {
+                this.setState({
+                    loading: true
+                });
+                // 模拟 ajax 请求，完成后清空
+                setTimeout(() => {
+                    this.setState({
+                        selectedRowKeys: [],
+                        loading: false,
+                    });
+                }, 500);
             },
-});
-
-const App = React.createClass({
-    render() {
-        return (< MyTable url="/elink_scm_web/sproductAction/query.do" columns={columns}  pageSize="10" />);
-    },
+            onSelectChange(selectedRowKeys) {
+                console.log('selectedRowKeys changed: ', selectedRowKeys);
+                this.setState({
+                    selectedRowKeys
+                });
+            },
+            render() {
+                const { loading, selectedRowKeys } = this.state;
+                const rowSelection = {selectedRowKeys,onChange: this.onSelectChange,};
+                const hasSelected = selectedRowKeys.length > 0;
+                return (
+                    <div>
+                        <Button     style={{marginBottom:10}}
+                                    type="primary" 
+                                    onClick={this.start} 
+                                    disabled={!hasSelected} 
+                                    loading={loading}>操作</Button>
+                        < Table     rowSelection={rowSelection}
+                                    columns = {columns}
+                                    dataSource = {this.state.data}
+                                    pagination = {this.state.pagination}
+                                    loading = {this.state.loading}
+                                    onChange = {this.handleTableChange}
+                                    rowKey={record => record.S_Product_ID}
+                                    bordered  />
+                    </div>
+                );
+            },
 });
 
 export default App;
