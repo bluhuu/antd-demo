@@ -2,18 +2,24 @@ import '../common/lib';
 import App from '../component/App_pag';
 import ReactDOM from 'react-dom';
 import React from 'react';
-import BrowserDemo from '../component/BrowserDemo';
+//import BrowserDemo from '../component/BrowserDemo';
 // import Breadcrumb from '../components/breadcrumb/index';
-import { Menu, Breadcrumb, Icon } from 'antd';
+import { Menu, Icon } from 'antd';
 
 const SubMenu = Menu.SubMenu;
+var myStyle = {
+  width:'20%',
+  fontSize: 100,
+  color: '#FF0000',
+  float: 'left'
+};
 
 ReactDOM.render(
-  <BrowserDemo>
-    <div className="row">
-      <aside className="ant-layout-sider">
+  //<BrowserDemo>
+    <div className="ant-layout-container">
+      <aside className="ant-layout-sider" style={myStyle}>
         <div className="ant-layout-logo"></div>
-        <Menu mode="inline" theme="dark"
+        <Menu mode="inline" //theme="dark"
           defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']}>
           <SubMenu key="sub1" title={<span><Icon type="user" />导航一</span>}>
             <Menu.Item key="1">选项1</Menu.Item>
@@ -35,7 +41,7 @@ ReactDOM.render(
           </SubMenu>
         </Menu>
       </aside>
-      <div className="ant-layout-main">
+      <div className="ant-layout-main" style={{float:'right',width:'79%'}}>
 {/*        <div className="ant-layout-header"></div>
         <div className="ant-layout-breadcrumb">
           <Breadcrumb>
@@ -57,6 +63,6 @@ ReactDOM.render(
         </div>*/}
       </div>
     </div>
-  </BrowserDemo>
+  //</BrowserDemo>
 , document.getElementById('react-content'));
 
