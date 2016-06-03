@@ -1,6 +1,6 @@
 import React from 'react';
 
-const App =  function BrowserDemo(props) {
+const BrowserDemo =  function BrowserDemo(props) {
   return (
     <article className="window-frame focus">
       <header className="top-bar">
@@ -17,5 +17,4 @@ const App =  function BrowserDemo(props) {
     </article>
   );
 }
-
-export default App;
+export default BrowserDemo;
