@@ -9,10 +9,14 @@
     "antd": "0.12.x",
     "atool-build": "0.6.x",
     "babel-plugin-antd": "0.3.x",
+    "classnames": "^2.2.5",
     "es3ify-loader": "^0.1.0",
     "jquery": "^2.2.3",
     "react": "0.14.x",
-    "react-dom": "0.14.x"
+    "react-bootstrap": "^0.29.4",
+    "react-dom": "0.14.x",
+    "react-intl": "^2.1.2",
+    "react-router": "^2.4.1"
   },
   "devDependencies": {
     "dora": "0.3.x",
