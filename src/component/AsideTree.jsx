@@ -16,7 +16,7 @@ const AsideTree = React.createClass({
           <Menu mode="inline" //theme="dark"
                 defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']}>
             <SubMenu key="sub1" title={<span><Icon type="user" />导航一</span>}>
-              <Menu.Item key="1">选项1</Menu.Item>
+              <Menu.Item key="1"> <a href="/docs/practice/cases"><span>实践</span></a></Menu.Item>
               <Menu.Item key="2">选项2</Menu.Item>
               <Menu.Item key="3">选项3</Menu.Item>
               <Menu.Item key="4">选项4</Menu.Item>
