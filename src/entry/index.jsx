@@ -3,6 +3,7 @@ import App from '../component/App_pag';
 import ReactDOM from 'react-dom';
 import React from 'react';
 import Header from '../component/Header';
+import NavbarSide from '../component/AsideTree2'
 
 //import BrowserDemo from '../component/BrowserDemo';
 // import Breadcrumb from '../components/breadcrumb/index';
@@ -26,4 +27,10 @@ ReactDOM.render(
       </div>
     </div>
     , document.getElementById('react-content'));
+
+ReactDOM.render(
+    <div className="ant-layout-side">
+      <NavbarSide />
+    </div>
+    , document.getElementById('react-side'));
 
