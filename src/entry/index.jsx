@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import Header from '../component/Header';
 import NavbarSide from '../component/AsideTree2'
-import MyModal from '../component/MyModal'
+import MyModalForm from '../component/MyModalForm'
 
 //import BrowserDemo from '../component/BrowserDemo';
 // import Breadcrumb from '../components/breadcrumb/index';
@@ -16,7 +16,7 @@ ReactDOM.render(
         <div className="ant-layout-container">
           <div className="ant-layout-content">
             <div style={{ height: 590 }}>
-              <MyModal />
+              <MyModalForm />
               <App url="/elink_scm_web/sproductAction/query.do"/>
             </div>
           </div>
