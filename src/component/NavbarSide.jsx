@@ -27,4 +27,6 @@ var NavbarSide = [
 		]},
 	{"name":"*d"}];
 
+
+
 export default NavbarSide;

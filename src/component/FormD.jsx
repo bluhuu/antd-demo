@@ -12,6 +12,7 @@ let FormD = React.createClass({
   render() {
     const { getFieldProps } = this.props.form;
     return (
+      <div>
       <Form inline onSubmit={this.handleSubmit}>
 
         <FormItem
@@ -55,6 +56,7 @@ let FormD = React.createClass({
         <Button type="primary" htmlType="submit">查询</Button>&nbsp;&nbsp;&nbsp;
         <Button type="primary" htmlType="Button">导出</Button>
       </Form>
+      </div>
     );
   },
 });
