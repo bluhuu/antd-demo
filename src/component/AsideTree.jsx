@@ -8,7 +8,8 @@ var myStyle = {
   float: 'left'
 };
 
-const AsideTree = React.createClass({
+const NavbarSide = React.createClass({
+  
   render() {
     return (
         <aside className="ant-layout-sider" style={myStyle}>
@@ -37,5 +38,5 @@ const AsideTree = React.createClass({
         </aside>
     );}
 });
-export default AsideTree;
+export default NavbarSide;
 

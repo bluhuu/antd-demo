@@ -10,9 +10,11 @@ import { Menu, Icon } from 'antd';
 import AsideTree from '../component/AsideTree';
 ReactDOM.render(
     <div className="ant-layout-container">
+  {/*
       <Header></Header>
       <AsideTree></AsideTree>
-      <div className="ant-layout-main" style={{float:'right',width:'79%'}}>
+  */}
+      <div className="ant-layout-main" style={{float:'right',width:'100%'}}>
         <div className="ant-layout-container">
           <div className="ant-layout-content">
             <div style={{ height: 590 }}>

@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import {Table, Button} from 'antd';
 import * as $ from 'jquery';
+import FormD from './FormD'
 
 const columns = [
         {
@@ -144,11 +145,15 @@ const App = React.createClass({
                 const hasSelected = selectedRowKeys.length > 0;
                 return (
                     <div>
-                        <Button     style={{marginBottom:10}}
+{/*                        <Button     style={{marginBottom:10}}
                                     type="primary" 
                                     onClick={this.start} 
                                     disabled={!hasSelected} 
-                                    loading={loading}>操作</Button>
+                                    loading={loading}>操作</Button>*/}
+
+                        <FormD/>
+
+
                         < Table     rowSelection={rowSelection}
                                     columns = {columns}
                                     dataSource = {this.state.data}
