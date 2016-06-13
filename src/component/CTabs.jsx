@@ -1,11 +1,14 @@
+import React from 'react';
 import { Tabs, Button } from 'antd';
+import App from '../component/App_pag';
+import MyModalForm from '../component/MyModalForm';
 const TabPane = Tabs.TabPane;
 
-const Demo = React.createClass({
+const CTabs = React.createClass({
   getInitialState() {
     this.newTabIndex = 0;
     const panes = [
-      <TabPane tab="首 页" key="1"></TabPane>,
+      <TabPane tab="首 页" key="1"><MyModalForm/><App url="/elink_scm_web/sproductAction/query.do"/></TabPane>,
     ];
     return {
       activeKey: panes[0].key,
@@ -41,9 +44,6 @@ const Demo = React.createClass({
   render() {
     return (
       <div>
-        <div style={{ marginBottom: 16 }}>
-          <Button type="ghost" onClick={this.add}>新增</Button>
-        </div>
         <Tabs hideAdd onChange={this.onChange} activeKey={this.state.activeKey}
           type="editable-card" onEdit={this.onEdit}
         >
@@ -53,5 +53,5 @@ const Demo = React.createClass({
     );
   },
 });
-
-ReactDOM.render(<Demo />, mountNode);
+export default CTabs;
+// ReactDOM.render(<Demo />, mountNode);
