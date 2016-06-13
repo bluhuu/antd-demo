@@ -25,8 +25,8 @@ let Single_sproduct_Modal = React.createClass({
     const { getFieldProps } = this.props.form;
 
     const formItemLayout = {
-      labelCol: { span: 4 },
-      wrapperCol: { span: 20 },
+      labelCol: { span : 4 },
+      wrapperCol: { span : 20 },
     };
     return (
       <div>
@@ -34,7 +34,7 @@ let Single_sproduct_Modal = React.createClass({
         <Modal title="添加商品" width="820" visible={this.state.visible} onOk={this.handleSubmit} onCancel={this.hideModal}>
           <Form horizontal  className="ant-advanced-search-form" form={this.props.form} style={{padding:20}}>
             <Row gutter={16} >
-              <Col span={8} >
+              <Col span="8" >
                 <FormItem {...formItemLayout}
                   label="ERP商品："
                   labelCol={{ span: 9 }}
@@ -61,7 +61,7 @@ let Single_sproduct_Modal = React.createClass({
                   <Input {...getFieldProps('username', {})} type="text" autoComplete="off" size="small"/>
                 </FormItem>
               </Col>
-              <Col span={8}>
+              <Col span="8">
                 <FormItem {...formItemLayout} label="规格："
                   labelCol={{ span: 9 }}
                   wrapperCol={{ span: 15 }}
@@ -87,7 +87,7 @@ let Single_sproduct_Modal = React.createClass({
                   <Input {...getFieldProps('username', {})} type="text" autoComplete="off" size="default"/>
                 </FormItem>
               </Col>
-              <Col span={8}>
+              <Col span="8">
                 <FormItem {...formItemLayout} label="大包装："
                   labelCol={{ span: 9 }}
                   wrapperCol={{ span: 15 }}

@@ -54,7 +54,7 @@ let Single_sproduct_Form = React.createClass({
       </FormItem>
 
         <Button type="primary" htmlType="submit">查询</Button>&nbsp;&nbsp;&nbsp;
-        <Button type="primary" htmlType="Button">导出</Button>
+        <Button type="primary" htmlType="button">导出</Button>
       </Form>
       </div>
     );

@@ -1,9 +1,9 @@
 import '../common/lib';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Contents from '../component/Contents';
+import App from '../component/App';
 
 ReactDOM.render(
-    <Contents />
+    <App />
     , document.getElementById('react-content'));
 
