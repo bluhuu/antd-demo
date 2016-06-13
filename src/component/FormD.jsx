@@ -13,7 +13,7 @@ let FormD = React.createClass({
     const { getFieldProps } = this.props.form;
     return (
       <div>
-      <Form inline onSubmit={this.handleSubmit}>
+      <Form inline onSubmit={this.handleSubmit} style={{padding:"16px 8px", background:"#f8f8f8",  border:"1px solid #d9d9d9",  border:"6px"}}>
 
         <FormItem
           label="商品:">

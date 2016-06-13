@@ -1,0 +1,72 @@
+[{
+	"id": 1003050,
+	"text": "单品管理",
+	"leaf": true,
+	"icon": "/elink_scm_web/images/mForm.png",
+	"moduleID": 1000926,
+	"value": "Single_SProduct_Entry",
+	"url": "sproduct/single_sproduct_mgr.jsp",
+	"readOnly": true,
+	"canExport": true,
+	"canReport": true,
+	"action": "X",
+	"Description": ""
+}, {
+	"id": 1002999,
+	"text": "商品价格管理",
+	"value": "商品价格管理",
+	"icon": "/elink_scm_web/images/Folder.gif",
+	"Description": ""
+}, {
+	"id": 1002989,
+	"text": "商品上下架设置",
+	"leaf": true,
+	"icon": "/elink_scm_web/images/mForm.png",
+	"moduleID": 1000910,
+	"value": "Product_Shelves_Config",
+	"url": "sproduct/sproduct_shelves_config.js",
+	"readOnly": true,
+	"canExport": true,
+	"canReport": true,
+	"action": "X",
+	"Description": ""
+}, {
+	"id": 1002968,
+	"text": "商品品牌设置",
+	"leaf": true,
+	"icon": "/elink_scm_web/images/mForm.png",
+	"moduleID": 1000897,
+	"value": "SProduct_Brand_Config",
+	"url": "promotion/infosproduct.js;sproduct/sproduct_brand_configform.js;sproduct/sproduct_brand_mgr.js;",
+	"readOnly": true,
+	"canExport": true,
+	"canReport": true,
+	"action": "X",
+	"Description": ""
+}, {
+	"id": 1003032,
+	"text": "商品分类管理",
+	"leaf": true,
+	"icon": "/elink_scm_web/images/mForm.png",
+	"moduleID": 1000931,
+	"value": "SProduct_Classification_Mgr",
+	"url": "sproduct/classification_products_list.js;sproduct/sproduct_classification_form.js;sproduct/sproduct_classification_mgr.js;",
+	"readOnly": true,
+	"canExport": true,
+	"canReport": true,
+	"action": "X",
+	"Description": ""
+}, {
+	"id": 1002991,
+	"text": "商品库存管理",
+	"leaf": true,
+	"icon": "/elink_scm_web/images/mForm.png",
+	"moduleID": 1000912,
+	"value": "SProduct_Storage_Config",
+	"url": "sproduct/sproduct_storage_configform.js;sproduct/sproduct_storage_mgr.js;",
+	"readOnly": true,
+	"canExport": true,
+	"canReport": true,
+	"action": "X",
+	"Description": ""
+}]
