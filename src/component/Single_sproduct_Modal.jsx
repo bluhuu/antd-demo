@@ -3,7 +3,7 @@ import { Button, Form, Input, Modal, Icon, Row, Col } from 'antd';
 const createForm = Form.create;
 const FormItem = Form.Item;
 
-let MyModalForm = React.createClass({
+let Single_sproduct_Modal = React.createClass({
   getInitialState() {
     return { visible: false };
   },
@@ -121,6 +121,6 @@ let MyModalForm = React.createClass({
   },
 });
 
-MyModalForm = createForm()(MyModalForm);
+Single_sproduct_Modal = createForm()(Single_sproduct_Modal);
 
-export default MyModalForm;
+export default Single_sproduct_Modal;

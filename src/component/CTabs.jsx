@@ -1,14 +1,14 @@
 import React from 'react';
 import { Tabs, Button } from 'antd';
-import App from '../component/App_pag';
-import MyModalForm from '../component/MyModalForm';
+import Single_sproduct_mgr from '../component/Single_sproduct_mgr';
+import Single_sproduct_Modal from '../component/Single_sproduct_Modal';
 const TabPane = Tabs.TabPane;
 
 const CTabs = React.createClass({
   getInitialState() {
     this.newTabIndex = 0;
     const panes = [
-      <TabPane tab="首 页" key="1"><MyModalForm/><App url="/elink_scm_web/sproductAction/query.do"/></TabPane>,
+      <TabPane tab="首 页" key="1"><Single_sproduct_Modal/><Single_sproduct_mgr url="/elink_scm_web/sproductAction/query.do"/></TabPane>,
     ];
     return {
       activeKey: panes[0].key,

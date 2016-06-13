@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import {Table, Button} from 'antd';
 import * as $ from 'jquery';
-import FormD from './FormD'
+import Single_sproduct_Form from './Single_sproduct_Form'
 
 const columns = [
         {
@@ -68,7 +68,7 @@ const columns = [
         }
 ];
 
-const App = React.createClass({
+const Single_sproduct_mgr = React.createClass({
             getInitialState() {
                 return {
                     selectedRowKeys: [],  // 这里配置默认勾选列
@@ -151,7 +151,7 @@ const App = React.createClass({
                                     disabled={!hasSelected} 
                                     loading={loading}>操作</Button>*/}
 
-                        <FormD/>
+                        <Single_sproduct_Form/>
 
 
                         < Table     rowSelection={rowSelection}
@@ -167,4 +167,4 @@ const App = React.createClass({
             },
 });
 
-export default App;
+export default Single_sproduct_mgr;

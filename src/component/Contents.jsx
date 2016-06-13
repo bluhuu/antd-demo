@@ -2,6 +2,10 @@ import React from 'react';
 import CTabs from '../component/CTabs';
 import NavbarSide from '../component/NavbarSide';
 const Contents = React.createClass({
+  add() {
+    console.log(123);
+    this.refs.Rctabs.add();
+  },
   render() {
     return (
         <div>
@@ -14,7 +18,8 @@ const Contents = React.createClass({
                   <div className="col-md-12 col-sm-12 col-xs-12">
                     <div className="board">
                       <div className="panel panel-primary">
-                        <CTabs />
+                        <input type="button" value="test" onClick={this.add} />
+                        <CTabs ref="Rctabs"/>
                       </div>
                     </div>
                   </div>

@@ -3,7 +3,7 @@ import { Form, Input, Button, Checkbox, Select } from 'antd';
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-let FormD = React.createClass({
+let Single_sproduct_Form = React.createClass({
   handleSubmit(e) {
     e.preventDefault();
     console.log('收到表单值：', this.props.form.getFieldsValue());
@@ -61,7 +61,7 @@ let FormD = React.createClass({
   },
 });
 
-FormD = Form.create()(FormD);
-export default FormD;
+Single_sproduct_Form = Form.create()(Single_sproduct_Form);
+export default Single_sproduct_Form;
 
 // ReactDOM.render(<Demo />, mountNode);
