@@ -18,20 +18,51 @@ var MenuAccordion = React.createClass({
       loading: true
     });
     $.ajax({
-      url: this.props.url,
-      data: params,
-      dataType: "json",
-      success: function(result) {
-        console.log(result.total);
-        console.log(result.rows);
-        var resultData = result.rows || result;
-        _self.setState({
-          loading: false,
-          data: resultData
-        });
+        url: this.props.urlA,
+        data: params,
+        dataType: "json",
+        async: false,
+        success: function(result) {
+            var resultList = result.rows || result;
+            _self.setState({
+              loading: false,
+              data: resultList
+            });
+            _self.fetchLeaf(resultList);
       },
     });
   },
+    fetchLeaf(resultData) {
+        var _self = this;
+        for (var i = 0, len = resultData.length; i < len; i++) {
+            if (!resultData[i].leaf) {
+                // console.log(resultData[i]);
+                $.ajax({
+                    url: this.props.urlB,
+                    data: {
+                        node: resultData[i].id,
+                        nodeID: resultData[i].id
+                    },
+                    dataType: "json",
+                    async: false,
+                    success: function(result) {
+                        var resultList = result.rows || result;
+                        resultData[i].tree = resultList;
+                        // _self.setState({
+                        //     loading: false,
+                        //     data: resultList
+                        // });
+                        _self.fetchLeaf(resultData[i].tree);
+                    },
+                });
+            }
+        }
+        //console.log("leaf: ", resultData);
+        _self.setState({
+            loading: false,
+            data: resultData
+        });
+    },
   componentDidMount: function() {
     this.fetch({
       node:this.props.id,
@@ -52,6 +83,7 @@ var MenuAccordion = React.createClass({
   },
   render: function() {
     var repos = this.state.data;
+    console.log("render: ", repos);//完整树结构
     var repoList = repos.map(function (repo) {
       if(repo.leaf){
         return(
