@@ -1,9 +1,10 @@
 import React from 'react';
 import { Menu, Icon } from 'antd';
+import MenuAccordion from '../component/MenuAccordion';
 
 var SubMenu = Menu.SubMenu;
 
-var MenuAccordion = React.createClass({
+var MenuAccordion2 = React.createClass({
   getInitialState: function() {
     return {
       current: '1',
@@ -19,6 +20,7 @@ var MenuAccordion = React.createClass({
     });
     $.ajax({
       url: this.props.url,
+      // url: "/elink_scm_web/menuTreeAction/loadAccordion.do",
       data: params,
       dataType: "json",
       success: function(result) {
@@ -31,6 +33,7 @@ var MenuAccordion = React.createClass({
         });
       },
     });
+
   },
   componentDidMount: function() {
     this.fetch({
@@ -60,7 +63,7 @@ var MenuAccordion = React.createClass({
       }else{
         return (
           <SubMenu key={repo.id} title={<span><Icon type="appstore" /><span>{repo.text}</span></span>}>
-            {/*<MenuAccordionA id={repo.id} url="/elink_scm_web/menuTreeAction/tree.do" />*/}
+            <MenuAccordion id={repo.id} url="/elink_scm_web/menuTreeAction/tree.do"/>
           </SubMenu>
         );
       }
@@ -76,9 +79,21 @@ var MenuAccordion = React.createClass({
         theme = "dark"
         mode="inline"
       >
+{/*        <SubMenu key="sub10" title={<span><Icon type="appstore" /><span>商品管理</span></span>}>
+          <Menu.Item key="101">单品管理</Menu.Item>
+          <SubMenu key="sub11" title="商品价格管理">
+            <Menu.Item key="111">群组价管理</Menu.Item>
+            <Menu.Item key="112">协议价管理</Menu.Item>
+            <Menu.Item key="113">会员等级价管理</Menu.Item>
+          </SubMenu>
+          <Menu.Item key="102">商品上下架设置</Menu.Item>
+          <Menu.Item key="103">商品品牌设置</Menu.Item>
+          <Menu.Item key="104">商品分类管理</Menu.Item>
+          <Menu.Item key="105">商品库存管理</Menu.Item>
+        </SubMenu>*/}
         {repoList}
       </Menu>
     );
   },
 });
-export default MenuAccordion;
+export default MenuAccordion2;

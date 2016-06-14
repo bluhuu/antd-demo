@@ -1,9 +1,10 @@
 import React from 'react';
 import { Menu, Icon } from 'antd';
+import MenuAccordionB from '../component/MenuAccordionB';
 
 var SubMenu = Menu.SubMenu;
 
-var MenuAccordion = React.createClass({
+var MenuAccordionA = React.createClass({
   getInitialState: function() {
     return {
       current: '1',
@@ -19,6 +20,7 @@ var MenuAccordion = React.createClass({
     });
     $.ajax({
       url: this.props.url,
+      // url: "/elink_scm_web/menuTreeAction/loadAccordion.do",
       data: params,
       dataType: "json",
       success: function(result) {
@@ -31,6 +33,7 @@ var MenuAccordion = React.createClass({
         });
       },
     });
+
   },
   componentDidMount: function() {
     this.fetch({
@@ -60,25 +63,15 @@ var MenuAccordion = React.createClass({
       }else{
         return (
           <SubMenu key={repo.id} title={<span><Icon type="appstore" /><span>{repo.text}</span></span>}>
-            {/*<MenuAccordionA id={repo.id} url="/elink_scm_web/menuTreeAction/tree.do" />*/}
+            <MenuAccordionB id={repo.id} url="/elink_scm_web/menuTreeAction/tree.do"/>
           </SubMenu>
         );
       }
     });
 
     return (
-      <Menu onClick={this.handleClick}
-        style={{ width: 240 }}
-        openKeys={this.state.openKeys}
-        onOpen={this.onToggle}
-        onClose={this.onToggle}
-        selectedKeys={[this.state.current]}
-        theme = "dark"
-        mode="inline"
-      >
         {repoList}
-      </Menu>
     );
   },
 });
-export default MenuAccordion;
+export default MenuAccordionA;

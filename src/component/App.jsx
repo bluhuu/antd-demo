@@ -11,7 +11,7 @@ const App = React.createClass({
       <div>
           <nav className="navbar-default navbar-side" role="navigation">
             {/*<NavbarSide addTab = {this.addTab}/>*/}
-            <MenuAccordion />
+            <MenuAccordion urlA="/elink_scm_web/menuTreeAction/loadAccordion.do" urlB="/elink_scm_web/menuTreeAction/tree.do"/>
           </nav>
           <div id="page-wrapper" className="border table-bordered">
               <div id="page-inner">
