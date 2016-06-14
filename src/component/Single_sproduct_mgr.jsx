@@ -92,7 +92,7 @@ const Single_sproduct_mgr = React.createClass({
                 });
             },
             fetch(params = {}) {
-                console.log('请求参数：', params);
+                // console.log('请求参数：', params);
                 var _self = this;
                 this.setState({
                     loading: true

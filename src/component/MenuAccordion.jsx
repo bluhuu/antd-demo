@@ -1,5 +1,6 @@
 import React from 'react';
 import { Menu, Icon } from 'antd';
+import MenuAccordion from '../component/MenuAccordion';
 const SubMenu = Menu.SubMenu;
 
 const MenuAccordion = React.createClass({
@@ -17,22 +18,27 @@ const MenuAccordion = React.createClass({
       loading: true
     });
     $.ajax({
-      url: "/elink_scm_web/menuTreeAction/loadAccordion.do",
+      url: "/elink_scm_web/menuTreeAction/tree.do",
+      // url: "/elink_scm_web/menuTreeAction/loadAccordion.do",
       data: params,
       dataType: "json",
       success: function(result) {
         console.log(result.total);
         console.log(result.rows);
+        var resultData = result.rows || result;
         _self.setState({
           loading: false,
-          data: result.rows
+          data: resultData
         });
       },
     });
 
   },
   componentDidMount: function() {
-    this.fetch({});
+    this.fetch({
+      node:1002964,
+      nodeID:1002964
+    });
   },
   handleClick(e) {
     this.props.addTab(e);
@@ -47,6 +53,21 @@ const MenuAccordion = React.createClass({
     });
   },
   render: function() {
+    var repos = this.state.data;
+    var repoList = repos.map(function (repo) {
+      if(repo.leaf){
+        return(
+          <Menu.Item key={repo.id}>{repo.text}</Menu.Item>
+          )
+      }else{
+        return (
+          <SubMenu key={repo.id} title={<span><Icon type="appstore" /><span>{repo.text}</span></span>}>
+            <MenuAccordion />
+          </SubMenu>
+        );
+      }
+    });
+
     return (
       <Menu onClick={this.handleClick}
         style={{ width: 240 }}
@@ -69,6 +90,7 @@ const MenuAccordion = React.createClass({
           <Menu.Item key="104">商品分类管理</Menu.Item>
           <Menu.Item key="105">商品库存管理</Menu.Item>
         </SubMenu>
+        {repoList}
       </Menu>
     );
   },
