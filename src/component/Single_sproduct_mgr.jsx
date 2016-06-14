@@ -104,8 +104,6 @@ const Single_sproduct_mgr = React.createClass({
                     success: function(result) {
                         const pagination = _self.state.pagination;
                         pagination.total = result.total;
-                        //console.log(result.total);
-                        //console.log(result.rows);
                         _self.setState({
                             loading: false,
                             data: result.rows,

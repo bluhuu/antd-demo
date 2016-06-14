@@ -1,6 +1,7 @@
 import React from 'react';
 import CTabs from '../component/CTabs';
 import NavbarSide from '../component/NavbarSide';
+import MenuAccordion from '../component/MenuAccordion';
 const App = React.createClass({
   addTab(e) {
     this.refs.Rctabs.add(e);
@@ -9,7 +10,8 @@ const App = React.createClass({
     return (
       <div>
           <nav className="navbar-default navbar-side" role="navigation">
-            <NavbarSide addTab = {this.addTab}/>
+            {/*<NavbarSide addTab = {this.addTab}/>*/}
+            <MenuAccordion />
           </nav>
           <div id="page-wrapper" className="border table-bordered">
               <div id="page-inner">
