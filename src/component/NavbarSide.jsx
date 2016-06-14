@@ -12,8 +12,7 @@ const NavbarSide = React.createClass({
   handleClick(e) {
     // console.log(this.refs.ctabs.add);
     //this.refs.Rctabs.add();
-    this.props.addTab();
-    console.log('click ', e);
+    this.props.addTab(e);
     this.setState({
       current: e.key,
       openKeys: e.keyPath.slice(1),

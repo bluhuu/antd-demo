@@ -2,12 +2,12 @@ import React from 'react';
 import CTabs from '../component/CTabs';
 import NavbarSide from '../component/NavbarSide';
 const App = React.createClass({
-  addTab() {
-    this.refs.Rctabs.add();
+  addTab(e) {
+    this.refs.Rctabs.add(e);
   },
   render() {
     return (
-        <div>
+      <div>
           <nav className="navbar-default navbar-side" role="navigation">
             <NavbarSide addTab = {this.addTab}/>
           </nav>
@@ -27,7 +27,7 @@ const App = React.createClass({
               </div>
           </div>
         </div>
-    );}
+    );
+  }
 });
 export default App;
-
