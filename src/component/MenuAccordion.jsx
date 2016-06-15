@@ -78,7 +78,7 @@ var MenuAccordion = React.createClass({
     },
     render: function() {
         var _self = this;
-        var repos = this.state.data;
+        var repos = this.state.data; //一级目录数组
         console.log("render: ", repos); //完整树结构s
 // ----
         var subList = {};
@@ -114,6 +114,7 @@ var MenuAccordion = React.createClass({
         var repoList = [];
         for (var i = 0; i < repos.length; i++) {
             var repo = repos[i];
+            // 一级目录
             if (repo.leaf) {
                 repoList.push(<Menu.Item key={repo.id}>{repo.text}</Menu.Item>);
             } else {
@@ -122,19 +123,9 @@ var MenuAccordion = React.createClass({
             }
         }
 
-// --------------------------------
-        // var repoList = repos.map(function(repo) {
-        //     if (repo.leaf) {
-        //         return (
-        //             <Menu.Item key={repo.id}>{repo.text}</Menu.Item>
-        //         )
-        //     } else {
-        //         return (
-        //             <SubMenu key={repo.id} title={<span><Icon type="appstore" /><span>{repo.text}</span></span>} />
-        //         );
-        //     }
-        // });
-// -------------------------------------
+
+
+
         return (
             <Menu onClick={this.handleClick}
         style={{ width: 240 }}
