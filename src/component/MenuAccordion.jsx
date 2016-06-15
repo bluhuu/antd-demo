@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu, Icon } from 'antd';
-import MenuSubAccordionA from './MenuSubAccordionA'
+// import MenuSubAccordionA from './MenuSubAccordionA'
 
 var SubMenu = Menu.SubMenu;
 
@@ -80,22 +80,61 @@ var MenuAccordion = React.createClass({
         var _self = this;
         var repos = this.state.data;
         console.log("render: ", repos); //完整树结构s
+// ----
+        var subList = {};
+        for (var i = 0; i < repos.length; i++) {
+            var repo = repos[i];
+            // console.log("---", repos[i].text, repos[i]);
+            var repoList = [];
+            //console.log("log: ",repo.text);
+            if (!repo.leaf) {
+                //console.log("log: ",repo.text);
+                for (var j = 0; j < repo.tree.length; j++) {
+                    if (repo.tree[j].leaf) {
+                        repoList.push(<Menu.Item key={repo.tree[j].id}>{repo.tree[j].text}</Menu.Item>);
+                    }else{
+                        var repoListK = [];
+                        for(var k = 0; k < repo.tree[j].tree.length; k++){
+                            if(repo.tree[j].tree[k].leaf){
+                                repoListK.push(<Menu.Item key={repo.tree[j].tree[k].id}>{repo.tree[j].tree[k].text}</Menu.Item>);
+                            }else{
 
-        // var repoList = this.renderList(repos);
-        var repoList = repos.map(function(repo) {
-            if (repo.leaf) {
-                return (
-                    <Menu.Item key={repo.id}>{repo.text}</Menu.Item>
-                )
-            } else {
-                return (
-                    <MenuSubAccordionA key={repo.id} data={repo} />
-                );
+                            }
+                        }
+                        repoList.push(<SubMenu key={repo.tree[j].id} title={<span><Icon type="appstore" /><span>{repo.tree[j].text}</span></span>}>{repoListK}</SubMenu>);
+                    }
+                }
+                subList[repo.text] = repoList;
+                //console.log(subList);
             }
-        });
+        }
+// ---
+        console.log(subList);
 
-        //console.log("repoList: ", repoList);
+        var repoList = [];
+        for (var i = 0; i < repos.length; i++) {
+            var repo = repos[i];
+            if (repo.leaf) {
+                repoList.push(<Menu.Item key={repo.id}>{repo.text}</Menu.Item>);
+            } else {
+                //repoList.push(React.createElement(Menu.SubMenu, {key: repo.id, title: repo.text }, ));
+                repoList.push(<SubMenu key={repo.id} title={<span><Icon type="appstore" /><span>{repo.text}</span></span>}>{subList[repo.text]}</SubMenu>);
+            }
+        }
 
+// --------------------------------
+        // var repoList = repos.map(function(repo) {
+        //     if (repo.leaf) {
+        //         return (
+        //             <Menu.Item key={repo.id}>{repo.text}</Menu.Item>
+        //         )
+        //     } else {
+        //         return (
+        //             <SubMenu key={repo.id} title={<span><Icon type="appstore" /><span>{repo.text}</span></span>} />
+        //         );
+        //     }
+        // });
+// -------------------------------------
         return (
             <Menu onClick={this.handleClick}
         style={{ width: 240 }}
