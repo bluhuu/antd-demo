@@ -60,23 +60,29 @@ var MenuSubAccordionA = React.createClass({
 
   render: function() {
     var repos = this.props.data.tree;
+    //console.log("data:",repos);
 
     var subList={};
     for(var i=0;i<repos.length;i++){
       var repo = repos[i];
+      console.log("---",repos[i].text,repos[i]);
       var repoList =[];
-      if(repo.tree){
-        for(var i=0;i<repo.tree.length;i++){
-          if(repo.tree[i].leaf){
-            repoList.push(<Menu.Item key={"index-" + repo.tree[i].id}>{repo.tree[i].text}</Menu.Item>);
+      //console.log("log: ",repo.text);
+      if(!repo.leaf){
+        //console.log("log: ",repo.text);
+        for(var y=0;y<repo.tree.length;y++){
+          if(repo.tree[y].leaf){
+            repoList.push(<Menu.Item key={"index-" + repo.tree[y].id}>{repo.tree[y].text}</Menu.Item>);
           }
         }
         subList[repo.text] = repoList;
+        //console.log(subList);
       }
     }
-    console.log(subList);
+    //console.log(subList);
     var repoList =[];
     for(var i=0;i<repos.length;i++){
+      console.log("###",repos[i].text,repos[i]);
       var repo = repos[i];
       if(repo.leaf){
         repoList.push(<Menu.Item key={"index-" + repo.id}>{repo.text}</Menu.Item>);

@@ -94,7 +94,7 @@ var MenuAccordion = React.createClass({
             }
         });
 
-        console.log("repoList: ", repoList);
+        //console.log("repoList: ", repoList);
 
         return (
             <Menu onClick={this.handleClick}
