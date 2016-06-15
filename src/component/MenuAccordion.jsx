@@ -1,7 +1,5 @@
 import React from 'react';
 import { Menu, Icon } from 'antd';
-// import MenuSubAccordionA from './MenuSubAccordionA'
-
 var SubMenu = Menu.SubMenu;
 
 var MenuAccordion = React.createClass({
@@ -27,7 +25,7 @@ var MenuAccordion = React.createClass({
                 var resultList = result.rows || result;
                 _self.setState({
                     loading: false,
-                    data: resultList
+                    data: resultList //根目录树组
                 });
                 _self.fetchLeaf(resultList);
             },
@@ -37,20 +35,22 @@ var MenuAccordion = React.createClass({
         var _self = this;
         for (var i = 0, len = resultData.length; i < len; i++) {
             if (!resultData[i].leaf) {
-                $.ajax({
-                    url: this.props.urlB,
-                    data: {
-                        node: resultData[i].id,
-                        nodeID: resultData[i].id
-                    },
-                    dataType: "json",
-                    async: false,
-                    success: function(result) {
-                        var resultList = result.rows || result;
-                        resultData[i].tree = resultList;
-                        _self.fetchLeaf(resultData[i].tree);
-                    },
-                });
+                (function(i){
+                    $.ajax({
+                        url: _self.props.urlB,
+                        data: {
+                            node: resultData[i].id,
+                            nodeID: resultData[i].id
+                        },
+                        dataType: "json",
+                        async: false,
+                        success: function(result) {
+                            resultData[i].tree = result.rows || result;
+                            // _self.forceUpdate();//强制刷新
+                            _self.fetchLeaf(resultData[i].tree);
+                        },
+                    });
+                })(i);
             }
         }
         _self.setState({
@@ -72,72 +72,58 @@ var MenuAccordion = React.createClass({
         });
     },
     onToggle(info) {
+        console.log(info);
         this.setState({
             openKeys: info.open ? info.keyPath : info.keyPath.slice(1),
         });
     },
     render: function() {
-        var _self = this;
-        var repos = this.state.data; //一级目录数组
-        console.log("render: ", repos); //完整树结构s
-// ----
-        var subList = {};
-        for (var i = 0; i < repos.length; i++) {
-            var repo = repos[i];
-            // console.log("---", repos[i].text, repos[i]);
-            var repoList = [];
-            //console.log("log: ",repo.text);
-            if (!repo.leaf) {
-                //console.log("log: ",repo.text);
-                for (var j = 0; j < repo.tree.length; j++) {
-                    if (repo.tree[j].leaf) {
-                        repoList.push(<Menu.Item key={repo.tree[j].id}>{repo.tree[j].text}</Menu.Item>);
-                    }else{
-                        var repoListK = [];
-                        for(var k = 0; k < repo.tree[j].tree.length; k++){
-                            if(repo.tree[j].tree[k].leaf){
-                                repoListK.push(<Menu.Item key={repo.tree[j].tree[k].id}>{repo.tree[j].tree[k].text}</Menu.Item>);
-                            }else{
-
-                            }
-                        }
-                        repoList.push(<SubMenu key={repo.tree[j].id} title={<span><Icon type="appstore" /><span>{repo.tree[j].text}</span></span>}>{repoListK}</SubMenu>);
-                    }
-                }
-                subList[repo.text] = repoList;
-                //console.log(subList);
-            }
-        }
-// ---
-        console.log(subList);
-
+        //一级目录数组
+        var repos = this.state.data;
+        //目录结构
         var repoList = [];
         for (var i = 0; i < repos.length; i++) {
-            var repo = repos[i];
             // 一级目录
-            if (repo.leaf) {
-                repoList.push(<Menu.Item key={repo.id}>{repo.text}</Menu.Item>);
+            if (repos[i].leaf) {
+                repoList.push(<Menu.Item key={repos[i].id}>{repos[i].text}</Menu.Item>);
             } else {
-                //repoList.push(React.createElement(Menu.SubMenu, {key: repo.id, title: repo.text }, ));
-                repoList.push(<SubMenu key={repo.id} title={<span><Icon type="appstore" /><span>{repo.text}</span></span>}>{subList[repo.text]}</SubMenu>);
+                var repoListJ = [];
+                if(repos[i].tree){
+                    for(var j = 0; j < repos[i].tree.length; j++){
+                        //二级目录
+                        if(repos[i].tree[j].leaf){
+                            repoListJ.push(<Menu.Item key={repos[i].tree[j].id}>{repos[i].tree[j].text}</Menu.Item>);
+                        }else{
+                            var repoListK = [];
+                            if(repos[i].tree[j].tree){
+                                for(var k = 0; k < repos[i].tree[j].tree.length; k++){
+                                    //三级目录
+                                    if(repos[i].tree[j].tree[k].leaf){
+                                        repoListK.push(<Menu.Item key={repos[i].tree[j].tree[k].id}>{repos[i].tree[j].tree[k].text}</Menu.Item>);
+                                    }else{
+                                        repoListk.push(<SubMenu key={repos[i].tree[j].tree[k].id} title={<span><Icon type="appstore" /><span>{repos[i].tree[j].tree[k].text}</span></span>}>{"..."}</SubMenu>);
+                                    }
+                                }
+                            }
+                            repoListJ.push(<SubMenu key={repos[i].tree[j].id} title={<span><Icon type="appstore" /><span>{repos[i].tree[j].text}</span></span>}>{repoListK}</SubMenu>);
+                        }
+                    }
+                }
+                repoList.push(<SubMenu key={repos[i].id} title={<span><Icon type="appstore" /><span>{repos[i].text}</span></span>}>{repoListJ}</SubMenu>);
             }
         }
-
-
-
-
         return (
-            <Menu onClick={this.handleClick}
-        style={{ width: 240 }}
-        openKeys={this.state.openKeys}
-        onOpen={this.onToggle}
-        onClose={this.onToggle}
-        selectedKeys={[this.state.current]}
-        theme = "dark"
-        mode="inline"
-      >
-        {repoList}
-      </Menu>
+            <Menu   onClick={this.handleClick}
+                    style={{ width: 240 }}
+                    openKeys={this.state.openKeys}
+                    onOpen={this.onToggle}
+                    onClose={this.onToggle}
+                    selectedKeys={[this.state.current]}
+                    // theme = "dark"
+                    mode="inline"
+                    >
+            {repoList}
+            </Menu>
         );
     },
 });

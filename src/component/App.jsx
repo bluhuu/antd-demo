@@ -1,17 +1,18 @@
 import React from 'react';
 import CTabs from '../component/CTabs';
-import NavbarSide from '../component/NavbarSide';
 import MenuAccordion from '../component/MenuAccordion';
+// import NavbarSide from '../component/NavbarSide';
+
 const App = React.createClass({
   addTab(e) {
-    this.refs.Rctabs.add(e);
+    this.refs.Rctabs.addTab(e);
   },
   render() {
     return (
       <div>
           <nav className="navbar-default navbar-side" role="navigation">
             {/*<NavbarSide addTab = {this.addTab}/>*/}
-            <MenuAccordion urlA="/elink_scm_web/menuTreeAction/loadAccordion.do" urlB="/elink_scm_web/menuTreeAction/tree.do"/>
+            <MenuAccordion addTab = {this.addTab} urlA="/elink_scm_web/menuTreeAction/loadAccordion.do" urlB="/elink_scm_web/menuTreeAction/tree.do"/>
           </nav>
           <div id="page-wrapper" className="border table-bordered">
               <div id="page-inner">

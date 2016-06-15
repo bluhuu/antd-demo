@@ -1,72 +1,77 @@
-﻿import React from 'react';
+import React from 'react';
 import {Table, Button} from 'antd';
 import * as $ from 'jquery';
 import Single_sproduct_Form from './Single_sproduct_Form'
 
-const columns = [
-        {
-            title : '品名',
-            width : 150,
-            sortable : true,
-            dataIndex : 'Name'
-        },{
-            title : '商品编码',
-            width : 100,
-            sortable : true,
-            dataIndex : 'S_Product_ID'
-        },{
-            title : '搜索码',
-            width : 100,
-            sortable : true,
-            dataIndex : 'Value'
-        },{
-            title : '通用名',
-            width : 150,
-            sortable : true,
-            dataIndex : 'MedicineName'
-        }, {
-            title : '商品名',
-            width : 150,
-            sortable : true,
-            dataIndex : 'ProductName'
-        }, {
-            title : '规格',
-            width : 120,
-            sortable : true,
-            dataIndex : 'ProductSpec'
-        }, {
-            title : '剂型',
-            width : 80,
-            sortable : true,
-            dataIndex : 'ProductStyleName'
-        }, {
-            title : '生产厂家',
-            width : 150,
-            sortable : true,
-            dataIndex : 'Manufacturer'
-        }, {
-            title : '单位',
-            width : 50,
-            sortable : true,
-            dataIndex : 'UOMName'
-        },{
-            title : '零售单位',
-            width : 100,
-            sortable : true,
-            dataIndex : 'RetailUOMName'
-        },{
-            title : '零售转批发单位系数',
-            width : 120,
-            sortable : true,
-            dataIndex : 'UOMRatio'
-        }, {
-            title : 'ERP商品编码',
-            width : 100,
-            sortable : true,
-            dataIndex : 'ProductCode'
+const columns = [{
+    title: '品名',
+    width: 150,
+    sortable: true,
+    dataIndex: 'Name',
+    fixed: 'left'
+}, {
+    title: '商品编码',
+    width: 100,
+    sortable: true,
+    dataIndex: 'S_Product_ID'
+}, {
+    title: '搜索码',
+    width: 100,
+    sortable: true,
+    dataIndex: 'Value'
+}, {
+    title: '通用名',
+    width: 150,
+    sortable: true,
+    dataIndex: 'MedicineName'
+}, {
+    title: '商品名',
+    width: 150,
+    sortable: true,
+    dataIndex: 'ProductName'
+}, {
+    title: '规格',
+    width: 120,
+    sortable: true,
+    dataIndex: 'ProductSpec'
+}, {
+    title: '剂型',
+    width: 80,
+    sortable: true,
+    dataIndex: 'ProductStyleName'
+}, {
+    title: '生产厂家',
+    width: 150,
+    sortable: true,
+    dataIndex: 'Manufacturer'
+}, {
+    title: '单位',
+    width: 50,
+    sortable: true,
+    dataIndex: 'UOMName'
+}, {
+    title: '零售单位',
+    width: 100,
+    sortable: true,
+    dataIndex: 'RetailUOMName'
+}, {
+    title: '零售转批发单位系数',
+    width: 120,
+    sortable: true,
+    dataIndex: 'UOMRatio'
+}, {
+    title: 'ERP商品编码',
+    width: 100,
+    sortable: true,
+    dataIndex: 'ProductCode'
 
-        }
-];
+}, {
+    title: '操作',
+    key: 'operation',
+    fixed: 'right',
+    width: 100,
+    render: () => <a href="#">操作</a>,
+}, ];
 
 const Single_sproduct_mgr = React.createClass({
             getInitialState() {
@@ -144,9 +149,9 @@ const Single_sproduct_mgr = React.createClass({
                 return (
                     <div>
 {/*                        <Button     style={{marginBottom:10}}
-                                    type="primary" 
-                                    onClick={this.start} 
-                                    disabled={!hasSelected} 
+                                    type="primary"
+                                    onClick={this.start}
+                                    disabled={!hasSelected}
                                     loading={loading}>操作</Button>*/}
 
                         <Single_sproduct_Form/>
@@ -155,10 +160,11 @@ const Single_sproduct_mgr = React.createClass({
                         < Table     rowSelection={rowSelection}
                                     columns = {columns}
                                     dataSource = {this.state.data}
+                                    scroll={{ x: true, y: 300 }}
                                     pagination = {this.state.pagination}
                                     loading = {this.state.loading}
                                     onChange = {this.handleTableChange}
-                                    rowKey={record => record.S_Product_ID}
+                                    rowKey = {record => record.S_Product_ID}
                                     bordered  />
                     </div>
                 );

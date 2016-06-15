@@ -4,10 +4,10 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 
 let Single_sproduct_Form = React.createClass({
-  handleSubmit(e) {
-    e.preventDefault();
-    console.log('收到表单值：', this.props.form.getFieldsValue());
-  },
+    handleSubmit(e) {
+        e.preventDefault();
+        console.log('收到表单值：', this.props.form.getFieldsValue());
+    },
 
   render() {
     const { getFieldProps } = this.props.form;
