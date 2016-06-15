@@ -1,5 +1,6 @@
 import React from 'react';
 import { Menu, Icon } from 'antd';
+import MenuSubAccordionA from './MenuSubAccordionA'
 
 var SubMenu = Menu.SubMenu;
 
@@ -88,10 +89,7 @@ var MenuAccordion = React.createClass({
                 )
             } else {
                 return (
-                    <SubMenu key={repo.id} title={<span><Icon type="appstore" /><span>{repo.text}</span></span>}>
-                        {/*<MenuAccordionA id={repo.id} url="/elink_scm_web/menuTreeAction/tree.do" />*/}
-                            {/*_self.renderList(repo.tree);*/}
-                        </SubMenu>
+                    <MenuSubAccordionA key={repo.id} data={repo} />
                 );
             }
         });
