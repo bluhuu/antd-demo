@@ -1,5 +1,5 @@
 import React from 'react';
-import CTabs from './system/single_sproduct/CTabs';
+import CTabs from './CTabs';
 import MenuAccordion from './MenuAccordion';
 // import NavbarSide from '../component/NavbarSide';
 
