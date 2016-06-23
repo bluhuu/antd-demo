@@ -1,14 +1,17 @@
 import React from 'react';
 import { Tabs } from 'antd';
-import Single_sproduct_mgr from '../component/Single_sproduct_mgr';
-import Single_sproduct_Modal from '../component/Single_sproduct_Modal';
+import Single_sproduct_mgr from './Single_sproduct_mgr';
+import Single_sproduct_Modal from './Single_sproduct_Modal';
 const TabPane = Tabs.TabPane;
 
 const CTabs = React.createClass({
     getInitialState() {
         this.newTabIndex = 0;
         const panes = [
-            <TabPane tab="首 页" key="1"><Single_sproduct_Modal/><Single_sproduct_mgr url="/elink_scm_web/sproductAction/query.do"/></TabPane>,
+            <TabPane tab="首 页" key="1">
+              <Single_sproduct_Modal/>
+              <Single_sproduct_mgr url="/elink_scm_web/sproductAction/query.do"/>
+            </TabPane>,
         ];
         return {
             activeKey: panes[0].key,
@@ -50,9 +53,11 @@ const CTabs = React.createClass({
         if (!flag) {
             console.log(e.key);
             if (e.key == 1003050) {
-                panes.push(<TabPane tab="单品管理" key={activeKey}><Single_sproduct_Modal/><Single_sproduct_mgr url="/elink_scm_web/sproductAction/query.do"/></TabPane>);
+              panes.push(<TabPane tab="单品管理" key={activeKey}><Single_sproduct_Modal/><Single_sproduct_mgr url="/elink_scm_web/sproductAction/query.do"/></TabPane>);
+            } else if (e.key == 1002972) {
+              panes.push(<TabPane tab={tabTitle} key={activeKey}>1002972</TabPane>);
             } else {
-                panes.push(<TabPane tab={tabTitle} key={activeKey}>新页面</TabPane>);
+              panes.push(<TabPane tab={tabTitle} key={activeKey}>新页面</TabPane>);
             }
         }
         this.setState({

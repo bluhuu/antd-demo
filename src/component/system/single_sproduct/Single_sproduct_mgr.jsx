@@ -154,8 +154,7 @@ const Single_sproduct_mgr = React.createClass({
                                     disabled={!hasSelected}
                                     loading={loading}>操作</Button>*/}
 
-                        <Single_sproduct_Form/>
-
+                        <Single_sproduct_Form query={this.fetch}/>
 
                         < Table     rowSelection={rowSelection}
                                     columns = {columns}

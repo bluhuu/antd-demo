@@ -1,6 +1,6 @@
 import React from 'react';
-import CTabs from '../component/CTabs';
-import MenuAccordion from '../component/MenuAccordion';
+import CTabs from './system/single_sproduct/CTabs';
+import MenuAccordion from './MenuAccordion';
 // import NavbarSide from '../component/NavbarSide';
 
 const App = React.createClass({

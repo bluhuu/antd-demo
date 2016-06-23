@@ -132,7 +132,7 @@ var MenuAccordion = React.createClass({
                 onOpen={this.onToggle}
                 onClose={this.onToggle}
                 selectedKeys={[this.state.current]}
-                // theme = "dark"
+                theme = "dark"
                 mode="inline"
                 >
         {repoList}
