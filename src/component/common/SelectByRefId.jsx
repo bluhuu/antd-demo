@@ -1,3 +1,4 @@
+import React from 'react';
 import { Select } from 'antd';
 const Option = Select.Option;
 
@@ -15,37 +16,29 @@ let SelectByRefId = React.createClass({
   fetchRefList(params = {}) {
     var _self = this;
     $.ajax({
-        url: this.props.url,
-        data: params,
-        dataType: "json",
-        success: function(result) { //{"total":2,"rows":[{"id":"CL","name":"分类"},{"id":"SP","name":"单品"}]}
-            _self.setState({
-                data: result.rows,
-            });
-          },
-        });
+      url: this.props.url,
+      data: params,
+      dataType: "json",
+      success: function(result) {
+          _self.setState({
+              data: result.rows,
+          });
+        },
+      error: function(){
+        console.log("出错：refID:",_self.props.refId," Select下拉数据请求失败！");
       },
-  componentDidMount() {
-    this.fetchRefList({
-        id: this.props.refId
-      });
-    },
-  handleProvinceChange(value) {
-    this.setState({
-      cities: cityData[value],
-      secondCity: cityData[value][0],
     });
   },
-  onSecondCityChange(value) {
-    this.setState({
-      secondCity: value,
+  componentDidMount() {
+    this.fetchRefList({
+      id: this.props.refId
     });
   },
 
   render() {
     const refOptions = this.state.data.map(dat => <Option key={dat.id}>{dat.name}</Option>);
     return (
-        <Select value={this.state.data[0].name} style={{ width: 90 }}>
+        <Select style={{ width: 90 }} {...this.props}>
           {refOptions}
         </Select>
     );

@@ -116,7 +116,6 @@ const Single_sproduct_mgr = React.createClass({
                         });
                     },
                 });
-
             },
             componentDidMount() {
                 this.fetch({

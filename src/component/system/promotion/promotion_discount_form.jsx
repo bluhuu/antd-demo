@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox, Select, DatePicker, Col } from 'antd';
+import SelectByRefId from '../../common/SelectByRefId';
 const FormItem = Form.Item;
 const Option = Select.Option;
 const RangePicker = DatePicker.RangePicker;
@@ -7,9 +8,9 @@ const RangePicker = DatePicker.RangePicker;
 let Promotion_discount_form = React.createClass({
 
   handleSubmit(e) {
-      e.preventDefault();
-      console.log('收到表单值：', this.props.form.getFieldsValue());
-      this.props.query(this.props.form.getFieldsValue());
+    e.preventDefault();
+    console.log('收到表单值：', this.props.form.getFieldsValue());
+    this.props.query(this.props.form.getFieldsValue());
   },
 
   render() {
@@ -21,27 +22,18 @@ let Promotion_discount_form = React.createClass({
           <RangePicker style={{ width: 184 }} {...getFieldProps('startDate')}/>
         </FormItem>
 
-        <FormItem id="select" label="促销范围:">
-          <Select id="select" size="large" defaultValue="yes" style={{ width: 60 }} {...getFieldProps('isActive')}>
-            <Option value="A">全部</Option>
-            <Option value="Y">是</Option>
-            <Option value="N">否</Option>
-          </Select>
+        <FormItem label="促销范围:">
+          <SelectByRefId refId="1000450" {...getFieldProps('promotionObject')}/>
         </FormItem>
 
-        <FormItem label="ERP商品编码:">
+        <FormItem label="活动编号:">
           <Input placeholder="" style={{ width: 100 }}
-            {...getFieldProps('productCode')} />
+            {...getFieldProps('promotionID')} />
         </FormItem>
 
-        <FormItem
-          id="select"
-          label="是否已上架:">
-          <Select id="select" size="large" defaultValue="yes" style={{ width: 60 }} {...getFieldProps('isShelved')}>
-            <Option value="A">全部</Option>
-            <Option value="Y">是</Option>
-            <Option value="N">否</Option>
-          </Select>
+        <FormItem label="活动名称:">
+          <Input placeholder="" style={{ width: 100 }}
+            {...getFieldProps('name')} />
         </FormItem>
 
         <Button type="primary" htmlType="submit">查询</Button>&nbsp;
