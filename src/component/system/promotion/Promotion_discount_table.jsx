@@ -86,40 +86,46 @@ const columns = [{
 ];
 
 const Promotion_discount_table = React.createClass({
+    getDefaultProps() {
+        return {
+            pageSize: 10
+        };
+    },
     getInitialState() {
         return {
             selectedRowKeys: [],
             data: [],
-            pagination: {pageSize:8,current:1},
-            loading: false
+            pagination: {pageSize:this.props.pageSize,current:1},
+            loading: false,
+            para: {}
         };
     },
+    //换页
     handleTableChange(pagination, filters, sorter) {
-        const pager = this.state.pagination;
-        pager.current = pagination.current;
-        this.setState({
-            pagination: pager,
-        });
-        this.fetch({
-            limit: pagination.pageSize,
-            start: (pagination.current - 1) * pagination.pageSize,
-            sortField: sorter.field,
-            sortOrder: sorter.order,
-            ...filters,
-        });
+        this.state.pagination.current=pagination.current;
+        this.fetch();
     },
-    fetch(params = {}) {
-        // console.log('请求参数：', params);
+    //从form获取参数，刷新页面
+    setParams(para){
+        this.state.para=para;
+        this.state.pagination.current=1;
+        this.fetch();
+    },
+    //从服务器获取数据
+    fetch() {
+        let params = {
+            limit: this.state.pagination.pageSize,
+            start: (this.state.pagination.current - 1) * this.state.pagination.pageSize,
+            ...this.state.para,
+        };
         var _self = this;
-        this.setState({
-            loading: true
-        });
+        this.setState({loading: true});
         $.ajax({
             url: this.props.url,
             data: params,
             dataType: "json",
             success: function(result) {
-                const pagination = _self.state.pagination;
+                let pagination = _self.state.pagination;
                 pagination.total = result.total;
                 _self.setState({
                     loading: false,
@@ -127,28 +133,15 @@ const Promotion_discount_table = React.createClass({
                     pagination,
                 });
             },
+            error: function(){
+                console.log("出错：Promotion 获取表单数据失败！");
+            },
         });
-
     },
     componentDidMount() {
-        this.fetch({
-            limit: this.state.pagination.pageSize,
-            start: (this.state.pagination.current - 1) * this.state.pagination.pageSize,
-            // promotionType:'DISCOUNT'
-        });
+        this.fetch();
     },
-    start() {
-        this.setState({
-            loading: true
-        });
-        // 模拟 ajax 请求，完成后清空
-        setTimeout(() => {
-            this.setState({
-                selectedRowKeys: [],
-                loading: false,
-            });
-        }, 500);
-    },
+    //行首选择框
     onSelectChange(selectedRowKeys) {
         console.log('selectedRowKeys changed: ', selectedRowKeys);
         this.setState({ selectedRowKeys });

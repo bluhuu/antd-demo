@@ -6,16 +6,22 @@ let Promotion_discount_main = React.createClass({
   getInitialState() {
     return {
       url:"/elink_scm_web/promotionAction/query.do",
+      pageSize:8
     };
   },
-  query(e){
-    this.refs.table.fetch(e);
+  //从form查询数据
+  query(FieldsValue){
+    console.log("FieldsValue:",FieldsValue);
+    this.refs.table.setParams(FieldsValue);
   },
   render() {
     return (
       <div>
         <Promotion_discount_form query={this.query}/>
-        <Promotion_discount_table ref="table" url={this.state.url}/>
+        <Promotion_discount_table
+          ref="table"
+          pageSize={this.state.pageSize}
+          url={this.state.url} />
       </div>
     )},
 });

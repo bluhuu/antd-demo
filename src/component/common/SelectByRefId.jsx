@@ -36,6 +36,7 @@ let SelectByRefId = React.createClass({
   },
 
   render() {
+    //key与 value 的值相同，可以省略 value 设置
     const refOptions = this.state.data.map(dat => <Option key={dat.id}>{dat.name}</Option>);
     return (
         <Select style={{ width: 90 }} {...this.props}>

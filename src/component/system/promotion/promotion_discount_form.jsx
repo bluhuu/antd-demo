@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox, Select, DatePicker, Col } from 'antd';
 import SelectByRefId from '../../common/SelectByRefId';
+import '../../common/Format';
 const FormItem = Form.Item;
 const Option = Select.Option;
 const RangePicker = DatePicker.RangePicker;
@@ -9,8 +10,17 @@ let Promotion_discount_form = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('收到表单值：', this.props.form.getFieldsValue());
-    this.props.query(this.props.form.getFieldsValue());
+    //调整参数格式
+    let paras = this.props.form.getFieldsValue();
+    if(paras.date){
+      paras.beginDate = paras.date[0].format('yyyy-MM-dd');
+      paras.endDate = paras.date[1].format('yyyy-MM-dd');
+    }
+    delete paras.date;
+    paras.promotionID = paras.promotionID && paras.promotionID.trim();
+    paras.name = paras.name && paras.name.trim();
+    //发送请求参数
+    this.props.query(paras);
   },
 
   render() {
@@ -19,7 +29,7 @@ let Promotion_discount_form = React.createClass({
       <div>
       <Form inline onSubmit={this.handleSubmit} style={{padding:"16px 8px", background:"#f8f8f8",  border:"1px solid #d9d9d9",  border:"6px"}}>
         <FormItem label="活动日期:">
-          <RangePicker style={{ width: 184 }} {...getFieldProps('startDate')}/>
+          <RangePicker format="yyyy-MM-dd" style={{ width: 184 }} {...getFieldProps('date')}/>
         </FormItem>
 
         <FormItem label="促销范围:">
@@ -27,13 +37,11 @@ let Promotion_discount_form = React.createClass({
         </FormItem>
 
         <FormItem label="活动编号:">
-          <Input placeholder="" style={{ width: 100 }}
-            {...getFieldProps('promotionID')} />
+          <Input placeholder="" style={{ width: 100 }} {...getFieldProps('promotionID')} />
         </FormItem>
 
         <FormItem label="活动名称:">
-          <Input placeholder="" style={{ width: 100 }}
-            {...getFieldProps('name')} />
+          <Input placeholder="" style={{ width: 100 }} {...getFieldProps('name')} />
         </FormItem>
 
         <Button type="primary" htmlType="submit">查询</Button>&nbsp;
