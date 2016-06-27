@@ -1,91 +1,10 @@
 import React from 'react';
 import {Table, Button} from 'antd';
 import * as $ from 'jquery';
+import columns from './columns.js'
+import downloadFile from '../../common/downloadFile.js';
 
-const columns = [{
-    title: '活动编号',
-    width: 120,
-    sortable: true,
-    dataIndex: 'S_PROMOTION_ID',
-    key: 'S_PROMOTION_ID',
-    fixed: 'left'
-}, {
-    title: '促销对象',
-    width: 120,
-    sortable: true,
-    dataIndex: 'PromotionObjectName',
-    key: 'PromotionObjectName'
-}, {
-    title: '促销名称',
-    width: 200,
-    sortable: true,
-    dataIndex: 'PromotionName',
-    key: 'PromotionName'
-}, {
-    title: '促销规则',
-    width: 120,
-    sortable: true,
-    dataIndex: 'PromotionRuleTypeName',
-    key: 'PromotionRuleTypeName'
-}, {
-    title: '可否退货',
-    width: 120,
-    sortable: true,
-    dataIndex: 'ReturnAbled',
-    key: 'ReturnAbled'
-}, {
-    title: '购满金额',
-    width: 120,
-    sortable: true,
-    dataIndex: 'SBuyAmt',
-    key: 'SBuyAmt'
-}, {
-    title: '购满件数',
-    width: 120,
-    sortable: true,
-    dataIndex: 'SProductQty',
-    key:'SProductQty'
-}, {
-    title: '减免类型',
-    width: 150,
-    sortable: true,
-    dataIndex: 'PromotionReduceTypeName',
-    key:'PromotionReduceTypeName'
-}, {
-    title: '减免金额',
-    width: 120,
-    sortable: true,
-    dataIndex: 'ReductionAmt',
-    key:'ReductionAmt'
-}, {
-    title: '减免折扣',
-    width: 120,
-    sortable: true,
-    dataIndex: 'Discount',
-    key:'Discount'
-}, {
-    title: '开始时间',
-    width: 150,
-    sortable: true,
-    dataIndex: 'BeginDate',
-    key:'BeginDate'
-}, {
-    title: '结束时间',
-    width: 150,
-    sortable: true,
-    dataIndex: 'EndDate',
-    key: 'EndDate'
-},
-// {
-//     title: '操作',
-//     key: 'operation',
-//     fixed: 'right',
-//     width: 150,
-//     render: () => <a href="#">操作</a>,
-// },
-];
-
-const Promotion_discount_table = React.createClass({
+let Promotion_discount_table = React.createClass({
     getDefaultProps() {
         return {
             pageSize: 10
@@ -140,6 +59,38 @@ const Promotion_discount_table = React.createClass({
     },
     componentDidMount() {
         this.fetch();
+    },
+    //导出Excel
+    exportExcel(params){
+        let cols = [...columns];
+        //---shim---
+        for (let i=cols.length-1;i>=0;i--){
+            if(cols[i].dataIndex){
+                cols[i].id=cols[i].dataIndex;
+                cols[i].name=cols[i].title;
+            }else{
+                console.log("exportExcel--for--else--");
+            }
+        }
+        //---
+        params.columns=JSON.stringify(cols);
+        params.title = "折扣管理";
+        var _self = this;
+        this.setState({loading: true});
+        $.ajax({
+            url: "/elink_scm_web/promotionAction/promotionListExport.do",
+            data: params,
+            dataType: "json",
+            success: function(result) {
+                _self.setState({
+                    loading: false,
+                });
+                downloadFile("/elink_scm_web/appAction/downfile.do?targetFile="+result.file);
+            },
+            error: function(){
+                console.log("出错：Promotion 获取表单数据失败！");
+            },
+        });
     },
     //行首选择框
     onSelectChange(selectedRowKeys) {

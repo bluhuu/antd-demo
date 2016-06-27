@@ -10,14 +10,21 @@ let Promotion_discount_main = React.createClass({
     };
   },
   //从form查询数据
-  query(FieldsValue){
-    console.log("FieldsValue:",FieldsValue);
-    this.refs.table.setParams(FieldsValue);
+  query(paras){
+    console.log("query: ",paras);
+    this.refs.table.setParams(paras);
+  },
+  //导出Excel
+  exportExcel(paras){
+    console.log("exportExcel: ",paras);
+    this.refs.table.exportExcel(paras);
   },
   render() {
     return (
       <div>
-        <Promotion_discount_form query={this.query}/>
+        <Promotion_discount_form
+          query={this.query}
+          exportExcel={this.exportExcel}/>
         <Promotion_discount_table
           ref="table"
           pageSize={this.state.pageSize}

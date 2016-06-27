@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select } from 'antd';
+import { Select, Input } from 'antd';
 const Option = Select.Option;
 
 let SelectByRefId = React.createClass({
@@ -37,12 +37,16 @@ let SelectByRefId = React.createClass({
 
   render() {
     //key与 value 的值相同，可以省略 value 设置
-    const refOptions = this.state.data.map(dat => <Option key={dat.id}>{dat.name}</Option>);
-    return (
-        <Select style={{ width: 90 }} {...this.props}>
-          {refOptions}
-        </Select>
-    );
+    if(!this.state.data){
+      return (<Input style={{ width: 90 }} {...this.props}/>);
+    }else{
+      const refOptions = this.state.data.map(dat => <Option key={dat.id}>{dat.name}</Option>);
+      return (
+          <Select style={{ width: 90 }} {...this.props}>
+            {refOptions}
+          </Select>
+      );
+    }
   },
 });
 
