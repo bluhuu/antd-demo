@@ -1,6 +1,7 @@
 import React from 'react';
 import Promotion_discount_table from './Promotion_discount_table';
 import Promotion_discount_form from './Promotion_discount_form';
+import Promotion_discount_modal from './Promotion_discount_modal';
 
 let Promotion_discount_main = React.createClass({
   getInitialState() {
@@ -25,6 +26,7 @@ let Promotion_discount_main = React.createClass({
         <Promotion_discount_form
           query={this.query}
           exportExcel={this.exportExcel}/>
+          <Promotion_discount_modal />
         <Promotion_discount_table
           ref="table"
           pageSize={this.state.pageSize}

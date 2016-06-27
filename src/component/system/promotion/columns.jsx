@@ -1,4 +1,5 @@
-const columns = [{
+import React from 'react';
+let columns = [{
     title: '活动编号',
     width: 120,
     sortable: true,

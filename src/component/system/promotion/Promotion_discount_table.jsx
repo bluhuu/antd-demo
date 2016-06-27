@@ -1,8 +1,7 @@
 import React from 'react';
 import {Table, Button} from 'antd';
 import * as $ from 'jquery';
-import columns from './columns.js'
-import downloadFile from '../../common/downloadFile.js';
+import columns from './columns'
 
 let Promotion_discount_table = React.createClass({
     getDefaultProps() {
@@ -59,38 +58,6 @@ let Promotion_discount_table = React.createClass({
     },
     componentDidMount() {
         this.fetch();
-    },
-    //导出Excel
-    exportExcel(params){
-        let cols = [...columns];
-        //---shim---
-        for (let i=cols.length-1;i>=0;i--){
-            if(cols[i].dataIndex){
-                cols[i].id=cols[i].dataIndex;
-                cols[i].name=cols[i].title;
-            }else{
-                console.log("exportExcel--for--else--");
-            }
-        }
-        //---
-        params.columns=JSON.stringify(cols);
-        params.title = "折扣管理";
-        var _self = this;
-        this.setState({loading: true});
-        $.ajax({
-            url: "/elink_scm_web/promotionAction/promotionListExport.do",
-            data: params,
-            dataType: "json",
-            success: function(result) {
-                _self.setState({
-                    loading: false,
-                });
-                downloadFile("/elink_scm_web/appAction/downfile.do?targetFile="+result.file);
-            },
-            error: function(){
-                console.log("出错：Promotion 获取表单数据失败！");
-            },
-        });
     },
     //行首选择框
     onSelectChange(selectedRowKeys) {
