@@ -41,6 +41,10 @@ let Promotion_discount_modal = React.createClass({
     });
     this.hideModal();
   },
+  handleReset(e) {
+    e.preventDefault();
+    this.props.form.resetFields();
+  },
 
   showModal() {this.setState({ visible: true }); },
   hideModal() {this.setState({ visible: false }); },
@@ -54,7 +58,12 @@ let Promotion_discount_modal = React.createClass({
     return (
       <div style={formStyle}>
         <Button type="primary" onClick={this.showModal} size="small"><Icon type="plus" />添加</Button>
-        <Modal title="添加" width="680" visible={this.state.visible} onOk={this.handleSubmit} onCancel={this.hideModal}>
+        <Modal title="添加" width="680" visible={this.state.visible} onOk={this.handleSubmit} onCancel={this.hideModal}
+              footer={[
+                <Button key="back" type="ghost" size="large" style={{width:85}}onClick={this.hideModal}>返 回</Button>,
+                <Button key="reset" type="ghost" size="large" onClick={this.handleReset}><Icon type="reload" />重置</Button>,
+                <Button key="submit" type="primary" size="large"  onClick={this.handleSubmit}><Icon type="check" />提 交 </Button>
+              ]} >
           <Form horizontal form={this.props.form} style={{padding:"0px 20px"}}>
             <Row gutter={16} >
               <Col span="11" >
