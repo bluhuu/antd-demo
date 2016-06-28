@@ -12,8 +12,8 @@ var formStyle = {
   'padding': '2px 8px',
   'background': "#f8f8f8",
   // 'border': '1px solid #d9d9d9',
-  'border-radius': '6',
-  'margin-bottom': '4',
+  'borderRadius': '6',
+  'marginBottom': '4',
 }
 
 let Promotion_discount_form = React.createClass({
@@ -26,8 +26,8 @@ let Promotion_discount_form = React.createClass({
     //调整参数格式
     let paras = this.props.form.getFieldsValue();
     if(paras.date){
-      paras.beginDate = paras.date[0].format('yyyy-MM-dd');
-      paras.endDate = paras.date[1].format('yyyy-MM-dd');
+      paras.beginDate = paras.date[0] && paras.date[0].format('yyyy-MM-dd');
+      paras.endDate = paras.date[1] && paras.date[1].format('yyyy-MM-dd');
     }
     delete paras.date;
     paras.promotionID = paras.promotionID && paras.promotionID.trim();
@@ -51,15 +51,13 @@ let Promotion_discount_form = React.createClass({
     const { getFieldProps } = this.props.form;
     return (
       <div>
-        <Form inline
-          onSubmit={this.handleSubmit}
-          style={formStyle} >
-          <FormItem label="活动日期:">
+        <Form inline onSubmit={this.handleSubmit} style={formStyle} >
+          <FormItem label="活动日期:" >
             <RangePicker format="yyyy-MM-dd" style={{ width: 184 }} {...getFieldProps('date')}/>
           </FormItem>
 
           <FormItem label="促销范围:">
-            <SelectByRefId refId="1000450" {...getFieldProps('promotionObject')}/>
+            <SelectByRefId refId="1000450" {...getFieldProps('promotionObject')} />
           </FormItem>
 
           <FormItem label="活动编号:">

@@ -1,3 +1,14 @@
+String.prototype.trim = function(){
+return this.replace(/(^\s*)|(\s*$)/g, "");
+}
+
+String.prototype.ltrim = function(){
+return this.replace(/(^\s*)/g, "");
+}
+
+String.prototype.rtrim = function() {
+return this.replace(/(\s*$)/g, "");
+}
 
 Date.prototype.format = function(format) {
    var date = {
@@ -21,14 +32,25 @@ Date.prototype.format = function(format) {
    return format;
 }
 
-String.prototype.trim = function(){
-return this.replace(/(^\s*)|(\s*$)/g, "");
+Date.getDayOfMonth = function (y, Mm) {
+    if (typeof y == 'undefined') { y = (new Date()).getFullYear(); }
+    if (typeof Mm == 'undefined') { Mm = (new Date()).getMonth(); }
+    var Feb = (y % 4 == 0) ? 29 : 28;
+    var aM = new Array(31, Feb, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+    return  aM[Mm];
 }
+Date.prototype.getDateOfPreMonth = function () {
+    var y = (this.getMonth() == 0) ? (this.getFullYear() - 1) : this.getFullYear();
+    var m = (this.getMonth() == 0) ? 11 : this.getMonth() - 1;
+    var preM = Date.getDayOfMonth(y, m);
+    var d = (preM < this.getDate()) ? preM : this.getDate();
+    return new Date(y, m, d);
+}
+Date.prototype.getDateOfNextMonth = function () {
+    var y = (this.getMonth() == 11) ? (this.getFullYear() + 1) : this.getFullYear();
+    var m = (this.getMonth() == 11) ? 0 : this.getMonth() + 1;
+    var preM = Date.getDayOfMonth(y, m);
+    var d = (preM < this.getDate()) ? preM : this.getDate();
+    return new Date(y, m, d);
+};
 
-String.prototype.ltrim = function(){
-return this.replace(/(^\s*)/g, "");
-}
-
-String.prototype.rtrim = function() {
-return this.replace(/(\s*$)/g, "");
-}

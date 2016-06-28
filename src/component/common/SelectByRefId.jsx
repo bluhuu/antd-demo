@@ -20,6 +20,7 @@ let SelectByRefId = React.createClass({
       data: params,
       dataType: "json",
       success: function(result) {
+        console.log("refId: ",_self.props.refId,result.rows);
           _self.setState({
               data: result.rows,
           });
@@ -42,7 +43,7 @@ let SelectByRefId = React.createClass({
     } else {
       const refOptions = this.state.data.map(dat => <Option key={dat.id}>{dat.name}</Option>);
       return (
-          <Select style={{ width: 90 }} {...this.props}>
+          <Select  style={{ width: 90 }} {...this.props}>
             {refOptions}
           </Select>
       );
