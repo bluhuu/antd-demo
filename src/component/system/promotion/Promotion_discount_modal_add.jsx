@@ -40,8 +40,16 @@ let Promotion_discount_modal_add = React.createClass({
     this.props.form.resetFields();
   },
 
-  showModal() {this.setState({ visible: true }); },
-  hideModal() {this.setState({ visible: false }); },
+  showModal() {
+    this.setState({
+      visible: true,
+    });
+  },
+  hideModal() {
+    this.setState({
+      visible: false,
+    });
+  },
 
   render() {
     const { getFieldProps } = this.props.form;
