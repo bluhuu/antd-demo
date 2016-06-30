@@ -49,9 +49,9 @@ let Promotion_discount_modal = React.createClass({
       success : function(result) {
         if(result.success){
           _self.props.query();
-          message.success(params.name + ' 添加成功！',3);
+          _self.props.edit?message.success(params.name + ' 修改成功！',3):message.success(params.name + ' 添加成功！',3);
         }else{
-          message.error(params.name + ' 添加失败： '+ result.msg,6);
+          _self.props.edit?message.error(params.name + ' 修改失败： '+ result.msg,6):message.error(params.name + ' 添加失败： '+ result.msg,6);
         }
       },
       error: function(){
@@ -69,14 +69,13 @@ let Promotion_discount_modal = React.createClass({
   },
   showModal() {
     if (!this.props.edit) {//如果是添加
-      console.log(this.props.edit);
       this.setState({visible: true});
     } else if (this.props.edit) {//如果是修改
       if (this.props.getRows) {
         let selectedRows = this.props.getRows();
         if (selectedRows.length == 1) {
-          console.log(selectedRows);
           this.setState({visible: true, rowData: selectedRows[0]});
+          this.props.form.resetFields();//加载数据后，form重置
         } else if (selectedRows.length > 1) {
           message.warn("只能选择一个活动项目！", 6);
         } else {
@@ -103,15 +102,14 @@ let Promotion_discount_modal = React.createClass({
   render() {
     const { getFieldProps } = this.props.form;
     const {rowData} = this.state;
-    console.log(rowData);
     const formItemLayout    = {
       labelCol  : { span : 8 },
       wrapperCol: { span : 16 },
     };
     return (
       <div style={{display:'inline',marginLeft:5}} {...this.props.ss}>
-        <Button type="primary" onClick={this.showModal} size="small"><Icon type="edit" />修 改</Button>
-        <Modal title="修 改" width="680" visible={this.state.visible} onOk={this.handleSubmit} onCancel={this.hideModal}
+        <Button type="primary" onClick={this.showModal} size="small"><Icon type={this.props.edit?"edit":"plus"} />{this.props.edit?"修 改":"添 加"}</Button>
+        <Modal title={this.props.edit?"修 改":"添 加"} width="680" visible={this.state.visible} onOk={this.handleSubmit} onCancel={this.hideModal}
               footer={[
                 <Button key="back" type="ghost" size="large" style={{width:85}} onClick={this.hideModal}>返 回</Button>,
                 <Button key="reset" type="ghost" size="large" onClick={this.handleReset}><Icon type="reload" />重 置</Button>,
