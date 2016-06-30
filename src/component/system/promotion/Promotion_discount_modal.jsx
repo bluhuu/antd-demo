@@ -89,14 +89,10 @@ let Promotion_discount_modal = React.createClass({
     this.setState({ visible: false });
   },
   ruleTypeChange(value){
-    let {rowData} = this.state;
-    rowData.PromotionRuleType=value;
-    this.setState({rowData:rowData});
+    this.state.rowData.PromotionRuleType=value;
   },
   reduceTypeChange(value){
-    let {rowData} = this.state;
-    rowData.PromotionReduceType=value;
-    this.setState({rowData:rowData});
+    this.state.rowData.PromotionReduceType=value;
   },
 
   render() {
