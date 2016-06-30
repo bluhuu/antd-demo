@@ -24,7 +24,7 @@ let rowData = {
   PromotionType      : "DISCOUNT"//促销类型
 };
 
-let Promotion_discount_modal_edit = React.createClass({
+let Promotion_discount_modal = React.createClass({
   getInitialState() {
     return {
       visible: false,
@@ -38,8 +38,10 @@ let Promotion_discount_modal_edit = React.createClass({
     params.PromotionType   ="DISCOUNT";
     params.beginDate       =typeof params.beginDate =="string" ? params.beginDate:params.beginDate.format('yyyy-MM-dd');
     params.endDate         =typeof params.endDate =="string" ? params.endDate :params.endDate.format('yyyy-MM-dd');
-    params.PromotionID     =this.state.rowData.S_PROMOTION_ID;
-    params.PromotionRuleID =this.state.rowData.S_PROMOTION_RULE_ID;
+    if (this.props.edit) {
+      params.PromotionID = this.state.rowData.S_PROMOTION_ID;
+      params.PromotionRuleID = this.state.rowData.S_PROMOTION_RULE_ID;
+    }
     $.ajax({
       url     : "/elink_scm_web/promotionAction/save.do",
       data    : params,
@@ -66,18 +68,20 @@ let Promotion_discount_modal_edit = React.createClass({
 
   },
   showModal() {
-    if(this.props.getRows){
-      let selectedRows = this.props.getRows();
-      if(selectedRows.length==1){
-        console.log(selectedRows);
-        this.setState({
-          visible: true,
-          rowData: selectedRows[0]
-        });
-      }else if(selectedRows.length > 1){
-        message.warn("只能选择一个活动项目！",6);
-      }else {
-        message.warn("请选择一个活动项目！",6);
+    if (!this.props.edit) {//如果是添加
+      console.log(this.props.edit);
+      this.setState({visible: true});
+    } else if (this.props.edit) {//如果是修改
+      if (this.props.getRows) {
+        let selectedRows = this.props.getRows();
+        if (selectedRows.length == 1) {
+          console.log(selectedRows);
+          this.setState({visible: true, rowData: selectedRows[0]});
+        } else if (selectedRows.length > 1) {
+          message.warn("只能选择一个活动项目！", 6);
+        } else {
+          message.warn("请选择一个活动项目！", 6);
+        }
       }
     }
   },
@@ -182,6 +186,6 @@ let Promotion_discount_modal_edit = React.createClass({
   },
 });
 
-Promotion_discount_modal_edit = createForm()(Promotion_discount_modal_edit);
+Promotion_discount_modal = createForm()(Promotion_discount_modal);
 
-export default Promotion_discount_modal_edit;
+export default Promotion_discount_modal;

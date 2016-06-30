@@ -1,49 +1,22 @@
-import { Modal, Button } from 'antd';
-
-const Test = React.createClass({
-  getInitialState() {
-    return {
-      loading: false,
-      visible: false,
-    };
+var converter = new Showdown.converter();
+var MarkdownEditor = React.createClass({
+  getInitialState: function() {
+    return {value: 'Type some *markdown* here!'};
   },
-  showModal() {
-    this.setState({
-      visible: true,
-    });
+  handleChange: function() {
+    this.setState({value: this.refs.textarea.getDOMNode().value});
   },
-  handleOk() {
-    this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({ loading: false, visible: false });
-    }, 3000);
-  },
-  handleCancel() {
-    this.setState({ visible: false });
-  },
-  render() {
+  render: function() {
     return (
-      <div>
-        <Button type="primary" onClick={this.showModal}> 显示对话框 </Button>
-        <Modal ref="modal"
-          visible={this.state.visible}
-          title="对话框标题" onOk={this.handleOk} onCancel={this.handleCancel}
-          footer={[
-            <Button key="back" type="ghost" size="large" onClick={this.handleCancel}>返 回</Button>,
-            <Button key="submit" type="primary" size="large" loading={this.state.loading} onClick={this.handleOk}>
-              提 交
-            </Button>,
-          ]}
-        >
-          <p>对话框的内容</p>
-          <p>对话框的内容</p>
-          <p>对话框的内容</p>
-          <p>对话框的内容</p>
-          <p>对话框的内容</p>
-        </Modal>
+      <div className="MarkdownEditor">
+        <h3>Input</h3>
+        <textarea onChange={this.handleChange} ref="textarea" defaultValue={this.state.value} />
+        <h3>Output</h3>
+        <div className="content" dangerouslySetInnerHTML={{ __html: converter.makeHtml(this.state.value) }}
+          />
       </div>
     );
-  },
+  }
 });
 
-ReactDOM.render(<Test />, mountNode);
+React.render(<MarkdownEditor />, mountNode);

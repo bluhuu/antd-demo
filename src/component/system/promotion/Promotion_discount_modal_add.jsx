@@ -50,6 +50,12 @@ let Promotion_discount_modal_add = React.createClass({
       visible: false,
     });
   },
+  ruleTypeChange(value){
+    console.log(value);
+  },
+  reduceTypeChange(value){
+    console.log(value);
+  },
 
   render() {
     const { getFieldProps } = this.props.form;
@@ -76,11 +82,15 @@ let Promotion_discount_modal_add = React.createClass({
                   <DatePicker style={{width:"195"}} {...getFieldProps('beginDate', {initialValue:new Date()})} />
                 </FormItem>
                 <FormItem {...formItemLayout} label="促销规则:" style={{margin:"3px 0px"}}>
-                  <SelectByRefId refId="1000451" {...getFieldProps('promotionRuleType',{initialValue:"AMT"})} style={{ width: '100%' }} defaultValue={{ key: 'CL' }}/>
+                  <SelectByRefId {...getFieldProps('promotionRuleType',{initialValue:"AMT",onChange:this.ruleTypeChange})}
+                    refId="1000451"
+                    style={{ width: '100%' }}/>
                 </FormItem>
+
                 <FormItem {...formItemLayout} label="购满金额:" style={{margin:"3px 0px"}}>
                   <Input {...getFieldProps('SBuyAmt', {})} type="text" autoComplete="off" size="small"/>
                 </FormItem>
+
                 <FormItem {...formItemLayout} label="多买多送:" style={{margin:"3px 0px"}}>
                   <RadioGroup style={{'paddingLeft':'20'}} {...getFieldProps('IsRepeat', { initialValue: 'Y' })}>
                     <Radio value="Y">是</Radio> <Radio value="N">否</Radio>
@@ -89,17 +99,21 @@ let Promotion_discount_modal_add = React.createClass({
               </Col>
               <Col span="11">
                 <FormItem {...formItemLayout} label="促销范围:" style={{margin:"3px 0px"}}>
-                  <SelectByRefId refId="1000450" {...getFieldProps('promotionObject',{initialValue:"CL"})} style={{ width: '100%' }} defaultValue={{ key: 'CL' }}/>
+                  <SelectByRefId refId="1000450" {...getFieldProps('promotionObject',{initialValue:"CL"})} style={{ width: '100%' }}/>
                 </FormItem>
                 <FormItem {...formItemLayout} label="结束时间:" style={{margin:"3px 0px"}}>
                   <DatePicker style={{width:"195"}} {...getFieldProps('endDate', {initialValue:new Date().getDateOfNextMonth()})} />
                 </FormItem>
                 <FormItem {...formItemLayout} label="减免类型:" style={{margin:"3px 0px"}}>
-                  <SelectByRefId refId="1000452" {...getFieldProps('reduceType',{initialValue:"AMT"})} style={{ width: '100%' }}/>
+                  <SelectByRefId {...getFieldProps('reduceType',{initialValue:"AMT",onChange:this.reduceTypeChange})}
+                    refId="1000452"
+                    style={{ width: '100%' }}/>
                 </FormItem>
+
                 <FormItem {...formItemLayout} label="减免金额:" style={{margin:"3px 0px"}}>
                   <Input {...getFieldProps('reductionAmt', {})} type="text" autoComplete="off" size="default"/>
                 </FormItem>
+
                 <FormItem {...formItemLayout} label="可否退货:" style={{margin:"3px 0px"}}>
                   <RadioGroup style={{'paddingLeft':'20'}} {...getFieldProps('ReturnAbled', { initialValue: 'N' })}>
                     <Radio value="Y">是</Radio> <Radio value="N">否</Radio>

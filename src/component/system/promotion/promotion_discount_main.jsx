@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Icon  } from 'antd';
 import Promotion_discount_table from './Promotion_discount_table';
 import Promotion_discount_form from './Promotion_discount_form';
-import Promotion_discount_modal_add from './Promotion_discount_modal_add';
+import Promotion_discount_modal from './Promotion_discount_modal';
 import Promotion_discount_modal_edit from './Promotion_discount_modal_edit';
 
 var formStyle = {
@@ -42,7 +42,8 @@ let Promotion_discount_main = React.createClass({
       <div>
         <Promotion_discount_form query={this.query} exportExcel={this.exportExcel}/>
           <div style={formStyle}>
-            <Promotion_discount_modal_add query={this.query}/>
+            <Promotion_discount_modal edit={false} query={this.query}/>
+            <Promotion_discount_modal edit={true} query={this.query} getRows={this.getRows}/>
             <Promotion_discount_modal_edit query={this.query} getRows={this.getRows}/>
             <Button type="primary" onClick={this.doDelete} size="small" style={{marginLeft:5}} ><Icon type="delete" />删 除</Button>
           </div>
