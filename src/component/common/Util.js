@@ -42,6 +42,9 @@ let Util = {
         }
         return newobj;
     },
+    /**
+    * 下载文件
+    */
     downloadFile: function(url) {
       try {
         var elemIF = document.createElement("iframe");
@@ -113,6 +116,21 @@ let Util = {
 
         var t2 = year2 + '-' + month2 + '-' + day2;
         return t2;
-    }
+    },
+    /**
+    * 对象属性拷贝
+    */
+    copyProperties: function(inSrcObj,inDestObj,inOverride){
+        if(inDestObj==null){
+            return inSrcObj;
+            }
+        var prop;
+        for(prop in inSrcObj){
+            if(inOverride||!inDestObj[prop]){//先判断是否重写
+                inDestObj[prop]=inSrcObj[prop];
+                }
+            }
+        return inDestObj;
+        }
 }
 export default Util;

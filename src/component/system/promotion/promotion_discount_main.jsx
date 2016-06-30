@@ -6,7 +6,7 @@ import Promotion_discount_modal from './Promotion_discount_modal';
 
 var formStyle = {
   'padding': '2px 4px',
-  'background': '#eee',
+  'background': '#ededed',
   'border': '1px solid #d9d9d9',
   'borderRadius': '6',
   'marginBottom': '4',
