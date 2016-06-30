@@ -33,13 +33,13 @@ let Promotion_discount_modal = React.createClass({
   },
 
   handleSubmit() {
-    let _self              =this;
-    let params             =this.props.form.getFieldsValue();
-    params.PromotionType   ="DISCOUNT";
-    params.beginDate       =typeof params.beginDate =="string" ? params.beginDate:params.beginDate.format('yyyy-MM-dd');
-    params.endDate         =typeof params.endDate =="string" ? params.endDate :params.endDate.format('yyyy-MM-dd');
+    let _self            = this;
+    let params           = this.props.form.getFieldsValue();
+    params.PromotionType = "DISCOUNT";
+    params.beginDate     = typeof params.beginDate =="string" ? params.beginDate:params.beginDate.format('yyyy-MM-dd');
+    params.endDate       = typeof params.endDate =="string" ? params.endDate :params.endDate.format('yyyy-MM-dd');
     if (this.props.edit) {
-      params.PromotionID = this.state.rowData.S_PROMOTION_ID;
+      params.PromotionID     = this.state.rowData.S_PROMOTION_ID;
       params.PromotionRuleID = this.state.rowData.S_PROMOTION_RULE_ID;
     }
     $.ajax({

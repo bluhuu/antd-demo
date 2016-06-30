@@ -41,7 +41,7 @@ let Promotion_discount_main = React.createClass({
       <div>
         <Promotion_discount_form query={this.query} exportExcel={this.exportExcel}/>
           <div style={formStyle}>
-            <Promotion_discount_modal add query={this.query}/>
+            <Promotion_discount_modal query={this.query}/>
             <Promotion_discount_modal edit query={this.query} getRows={this.getRows}/>
             <Button type="primary" onClick={this.doDelete} size="small" style={{marginLeft:5}} ><Icon type="delete" />删 除</Button>
           </div>
