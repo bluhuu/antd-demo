@@ -10,7 +10,7 @@ var formStyle = {
   'border': '1px solid #d9d9d9',
   'borderRadius': '6',
   'marginBottom': '4',
-}
+};
 
 let Promotion_discount_main = React.createClass({
   getInitialState() {

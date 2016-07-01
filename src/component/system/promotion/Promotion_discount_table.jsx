@@ -1,7 +1,7 @@
 import React from 'react';
 import {Table, Button, message, Modal} from 'antd';
 import * as $ from 'jquery';
-import columns from './columns'
+import columns from './columns';
 const confirm = Modal.confirm;
 
 let Promotion_discount_table = React.createClass({
@@ -64,7 +64,7 @@ let Promotion_discount_table = React.createClass({
           title: '您是否确认要删除:',
           content: selectedRowKeys.toString(),
           onOk() {
-            _self.doDelete(selectedRowKeys)
+            _self.doDelete(selectedRowKeys);
           },
           onCancel() {
             message.info('已取消！',3);
@@ -83,9 +83,9 @@ let Promotion_discount_table = React.createClass({
         let params = {
             limit: this.state.pagination.pageSize,
             start: (this.state.pagination.current - 1) * this.state.pagination.pageSize,
-            ...this.state.para,
+            ...this.state.para
         };
-        var _self = this;
+        let _self = this;
         _self.setState({loading: true});
         $.ajax({
             url: _self.props.url,
@@ -95,7 +95,7 @@ let Promotion_discount_table = React.createClass({
                 let pagination = _self.state.pagination;
                 pagination.total = result.total;
                 //当前页为空返回到上一页
-                if(result.rows && result.rows.length!=0 || _self.state.pagination.current==1){
+                if(result.rows && result.rows.length!='0' || _self.state.pagination.current==1){
                   _self.setState({
                     loading: false,
                     data: result.rows,
@@ -128,7 +128,6 @@ let Promotion_discount_table = React.createClass({
         const { loading, selectedRowKeys } = this.state;
         const rowSelection = {selectedRowKeys,onChange: this.onSelectChange,};
         return (
-            <div>
                 <Table  rowSelection={rowSelection}
                         columns = {columns}
                         dataSource = {this.state.data}
@@ -138,7 +137,6 @@ let Promotion_discount_table = React.createClass({
                         onChange = {this.handleTableChange}
                         rowKey = {record => record.S_PROMOTION_ID}
                         bordered  />
-            </div>
         );
     },
 });

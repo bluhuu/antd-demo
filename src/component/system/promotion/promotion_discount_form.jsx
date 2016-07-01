@@ -3,7 +3,7 @@ import { Form, Input, Button, Checkbox, Select, DatePicker, Col } from 'antd';
 import SelectByRefId from '../../common/SelectByRefId';
 import '../../common/Format';
 import ExceptExcel from '../../common/ExportExcel';
-import columns from './columns'
+import columns from './columns';
 const FormItem = Form.Item;
 const Option = Select.Option;
 const RangePicker = DatePicker.RangePicker;
@@ -14,7 +14,7 @@ var formStyle = {
   // 'border': '1px solid #d9d9d9',
   'borderRadius': '6',
   'marginBottom': '4',
-}
+};
 
 let Promotion_discount_form = React.createClass({
   getInitialState() {
